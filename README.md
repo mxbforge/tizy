@@ -6,6 +6,18 @@
 
 [Русский](README.ru.md) · [Installation](docs/INSTALLATION.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build](docs/BUILD.md)
 
+## Downloads
+
+| File | Purpose |
+|---|---|
+| [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip) | **TV installation** — WGT and license notices |
+| [TIZY-0.14.4-source.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-source.zip) | Source code for this release |
+| [TIZY-0.14.4-screenshots-en.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-screenshots-en.zip) | Interface screenshots — PNG, 1920×1080 |
+| [SHA256SUMS.txt](https://github.com/mxbforge/tizy/releases/download/v0.14.4/SHA256SUMS.txt) | SHA256 checksums for the release files |
+| [TIZY-0.14.4-Universal.sha256](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal.sha256) | SHA256 of the WGT after extraction |
+
+Extract the installation ZIP and install its WGT with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). [Installation guide](docs/INSTALLATION.md).
+
 ![TIZY home](assets/screenshots/home.png)
 
 TIZY combines a TV interface, Xray-core and an existing [Vetro](https://github.com/andrearicci93/vetro) UID-0 integration. Bring your own server or subscription; no VPN service or credentials are included.
@@ -21,7 +33,7 @@ TIZY combines a TV interface, Xray-core and an existing [Vetro](https://github.c
 
 ## Install
 
-Download the installation ZIP from [Releases](https://github.com/mxbforge/tizy/releases), extract its WGT and install it with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). First configure a compatible [Vetro](https://github.com/andrearicci93/vetro) root integration, then restore its autonomous connection after installation. Use your own signing certificate. [Step-by-step guide](docs/INSTALLATION.md).
+Download [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip), extract its WGT and install it with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). First configure a compatible [Vetro](https://github.com/andrearicci93/vetro) root integration, then restore its autonomous connection after installation. Use your own signing certificate. [Step-by-step guide](docs/INSTALLATION.md).
 
 ## Compatibility and scope
 

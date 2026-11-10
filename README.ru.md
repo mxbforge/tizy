@@ -8,6 +8,18 @@
 
 [Установка](docs/INSTALLATION.md) · [Совместимость](docs/COMPATIBILITY.md) · [Вопросы и ошибки](docs/TROUBLESHOOTING.md) · [Сборка](docs/BUILD.md) · [English](README.md)
 
+## Скачать
+
+| Файл | Назначение |
+|---|---|
+| [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip) | **Установка на ТВ** — WGT и лицензии |
+| [TIZY-0.14.4-source.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-source.zip) | Исходный код выпуска |
+| [TIZY-0.14.4-screenshots-en.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-screenshots-en.zip) | Скриншоты интерфейса — PNG, 1920×1080 |
+| [SHA256SUMS.txt](https://github.com/mxbforge/tizy/releases/download/v0.14.4/SHA256SUMS.txt) | SHA256 файлов релиза |
+| [TIZY-0.14.4-Universal.sha256](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal.sha256) | SHA256 WGT после распаковки |
+
+Распакуйте установочный архив и установите WGT через [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). [Инструкция по установке](docs/INSTALLATION.md).
+
 ![Главная TIZY](assets/screenshots/home.png)
 
 ## Возможности
@@ -26,7 +38,7 @@ TIZY использует ваш сервер или подписку. Встр�
 ## Установка
 
 1. Проверьте [совместимость](docs/COMPATIBILITY.md) и подготовьте [Vetro](https://github.com/andrearicci93/vetro) с подключённым root-agent (`uid=0`).
-2. В разделе **Releases** скачайте установочный комплект `TIZY-0.14.4-Universal-install.zip` и распакуйте его.
+2. Скачайте установочный комплект [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip) и распакуйте его.
 3. Установите находящийся внутри `.wgt` через [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases).
 4. Верните автономное соединение [Vetro](https://github.com/andrearicci93/vetro) по его инструкции, откройте TIZY и добавьте свой сервер.
 

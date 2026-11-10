@@ -8,7 +8,7 @@ Follow the [official Vetro installation guide](https://github.com/andrearicci93/
 
 ## 1. Download the package
 
-From [Releases](https://github.com/mxbforge/tizy/releases), download `TIZY-0.14.4-Universal-install.zip` and extract it. Keep the license notices with the WGT. GitHub's automatic Source code archives are developer sources, not installable WGT files.
+From [Releases](https://github.com/mxbforge/tizy/releases), download [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip) and extract it. Keep the license notices with the WGT. GitHub's automatic Source code archives are developer sources, not installable WGT files.
 
 Check the extracted WGT if needed:
 

@@ -4,7 +4,7 @@ A remote-friendly VPN client for Samsung Tizen TVs, built around Xray-core and a
 
 ## Download and install
 
-Download **TIZY-0.14.4-Universal-install.zip**, extract it, and install the WGT with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). Keep the included license notices. You need your own server or subscription and a working root integration. [Installation guide](https://github.com/mxbforge/tizy/blob/main/docs/INSTALLATION.md).
+Download [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip), extract it, and install the WGT with [Apps2Samsung](https://github.com/Apps2Samsung/Apps2Samsung/releases). Keep the included license notices. You need your own server or subscription and a working root integration. [Installation guide](https://github.com/mxbforge/tizy/blob/main/docs/INSTALLATION.md).
 
 ## Included
 
@@ -21,10 +21,10 @@ Application redirection covers TCP and DNS, with direct IPv6 and UDP/QUIC restri
 
 ## Assets
 
-- `TIZY-0.14.4-Universal-install.zip`: WGT and license notices.
-- `TIZY-0.14.4-Universal.sha256`: checksum of the extracted WGT.
-- `TIZY-0.14.4-source.zip`: prepared source tree.
-- `TIZY-0.14.4-screenshots-en.zip`: interface screenshots, 1920×1080 PNG.
-- `SHA256SUMS.txt`: checksums of release assets.
+- [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip): WGT and license notices.
+- [TIZY-0.14.4-Universal.sha256](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal.sha256): checksum of the extracted WGT.
+- [TIZY-0.14.4-source.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-source.zip): prepared source tree.
+- [TIZY-0.14.4-screenshots-en.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-screenshots-en.zip): interface screenshots, 1920×1080 PNG.
+- [SHA256SUMS.txt](https://github.com/mxbforge/tizy/releases/download/v0.14.4/SHA256SUMS.txt): checksums of release assets.
 
 Original client code is MIT licensed; third-party licenses are preserved. Thanks to Xray-core, [Vetro](https://github.com/andrearicci93/vetro), Apps2Samsung and the configuration-transfer projects. TIZY is an independent project.
