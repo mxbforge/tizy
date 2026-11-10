@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict'),Logging=require('../app/logging'),EventLog=require('../app/service/event-log');
+const prefs=Logging.defaults();assert.equal(prefs.details,true);assert.equal(prefs.enabled,false);assert.equal(Logging.preferences({level:'all',details:false,categories:[]}).enabled,true);assert.equal(prefs.categories.length,4);
+for(const bad of [null,{},[],{...prefs,level:'debug'},{...prefs,categories:['system','system']},{...prefs,details:1},{...prefs,enabled:'false'},{...prefs,categories:['private']}])assert.throws(()=>Logging.preferences(bad));
+const copied=Logging.preferences(prefs);copied.categories.pop();assert.equal(prefs.categories.length,4);
+assert.equal(Logging.visible({category:'network',level:'debug'},prefs),true);assert.equal(Logging.visible({category:'network',level:'debug'},{...prefs,details:false}),false);
+assert.equal(Logging.visible({category:'network',level:'error'},{...prefs,level:'warning'}),true);assert.equal(Logging.visible({category:'system',level:'info'},{...prefs,level:'warning'}),false);assert.equal(Logging.visible({category:'system',level:'warning'},{...prefs,level:'error'}),false);assert.equal(Logging.visible({category:'system',level:'error'},{...prefs,categories:[]}),false);
+const log=new EventLog(s=>s.split('test-sensitive-value').join('[ключ скрыт]'));
+log.add('safe text','network','info','test-sensitive-value vless://uuid@host?pbk=private 11111111-2222-4333-8444-555555555555 token=secret password:private');
+const json=JSON.stringify(log.items);for(const value of ['test-sensitive-value','vless://','11111111-2222-4333-8444-555555555555','token=secret','password:private'])assert.ok(!json.includes(value));assert.equal(log.items[0].category,'network');assert.ok(log.items[0].detail.includes('[ключ скрыт]'));
+assert.ok(!EventLog.scrub('{"token":"synthetic-secret","pbk":"synthetic-key"}').includes('synthetic'));
+const oldCount=log.items.length;log.enabled=false;assert.equal(log.add('should not record'),null);assert.equal(log.items.length,oldCount);log.enabled=true;assert.equal(Logging.message('Соединение проверено: Test · приложения ТВ · TCP IPv4 и DNS'),'VPN подключён к серверу: Test');
+for(let i=0;i<350;i++)log.add('event '+i,'system','debug');assert.equal(log.items.length,300);assert.equal(log.items[0].text,'event 349');const previous=log.items[0].id;log.clear();assert.equal(log.items.length,0);log.add('new');assert.ok(log.items[0].id>previous);
+console.log('Persistent log preference validation, category/severity/detail filtering, bounded storage, safe redaction and clear: passed');

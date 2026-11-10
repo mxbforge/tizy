@@ -1,0 +1,30 @@
+# Generated files and dependencies
+node_modules/
+deps/node_modules/
+app/service/node_modules/
+app/service/vendor/
+app/qrcode.js
+dist/
+coverage/
+layout-verified.json
+.DS_Store
+__pycache__/
+*.pyc
+# Installation secrets and local device data
+**/token.txt
+**/auth.header
+**/local-key.json
+**/profiles.json
+**/tizy-endpoint.json
+**/country-cache.json
+**/vetro-port.json
+*.p12
+*.pfx
+*.pem
+*.key
+.env
+.env.*
+!/.env.example
+*.log
+before-*.json
+verified-*.json

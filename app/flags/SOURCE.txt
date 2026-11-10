@@ -1,0 +1,5 @@
+flag-icons
+https://github.com/lipis/flag-icons
+Commit: ac7e0eb3259eb62aa6100c435607e2fe03896a97
+MIT license in LICENSE.txt
+Local unmodified 4x3 SVG assets. TIZY renders a separate waving filter.

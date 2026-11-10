@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://tizy.local" version="0.14.4" viewmodes="maximized">
+ <tizen:application id="severtvapp.app" package="severtvapp" required_version="6.0"/>
+ <name>TIZY</name><author>TIZY</author><content src="index.html"/><icon src="icon.png"/>
+ <access origin="http://127.0.0.1:19090" subdomains="false"/>
+ <access origin="http://127.0.0.1:19100" subdomains="false"/>
+ <access origin="http://127.0.0.1:19101" subdomains="false"/>
+ <access origin="http://127.0.0.1:19102" subdomains="false"/>
+ <access origin="http://127.0.0.1:19103" subdomains="false"/>
+ <access origin="http://127.0.0.1:19104" subdomains="false"/>
+ <access origin="http://127.0.0.1:19105" subdomains="false"/>
+ <access origin="http://127.0.0.1:19106" subdomains="false"/>
+ <access origin="http://127.0.0.1:19107" subdomains="false"/>
+ <access origin="http://127.0.0.1:19108" subdomains="false"/>
+ <access origin="http://127.0.0.1:19109" subdomains="false"/>
+ <access origin="http://127.0.0.1:19110" subdomains="false"/>
+ <access origin="http://127.0.0.1:19111" subdomains="false"/>
+ <access origin="http://127.0.0.1:19112" subdomains="false"/>
+ <access origin="http://127.0.0.1:19113" subdomains="false"/>
+ <access origin="http://127.0.0.1:19114" subdomains="false"/>
+ <access origin="http://127.0.0.1:19115" subdomains="false"/>
+ <access origin="http://127.0.0.1:19116" subdomains="false"/>
+ <access origin="http://127.0.0.1:19117" subdomains="false"/>
+ <access origin="http://127.0.0.1:19118" subdomains="false"/>
+ <access origin="http://127.0.0.1:19119" subdomains="false"/>
+ <access origin="http://127.0.0.1:19120" subdomains="false"/>
+ <access origin="http://127.0.0.1:19121" subdomains="false"/>
+ <access origin="http://127.0.0.1:19122" subdomains="false"/>
+ <access origin="http://127.0.0.1:19123" subdomains="false"/>
+ <access origin="http://127.0.0.1:19124" subdomains="false"/>
+ <access origin="http://127.0.0.1:19125" subdomains="false"/>
+ <access origin="http://127.0.0.1:19126" subdomains="false"/>
+ <access origin="http://127.0.0.1:19127" subdomains="false"/>
+ <access origin="http://127.0.0.1:19128" subdomains="false"/>
+ <access origin="http://127.0.0.1:19129" subdomains="false"/>
+ <access origin="http://127.0.0.1:19130" subdomains="false"/>
+ <access origin="http://127.0.0.1:19131" subdomains="false"/>
+ <feature name="http://tizen.org/feature/screen.size.all"/>
+ <feature name="http://tizen.org/feature/web.service"/>
+ <tizen:privilege name="http://tizen.org/privilege/internet"/>
+ <tizen:privilege name="http://tizen.org/privilege/filesystem.read"/>
+ <tizen:privilege name="http://tizen.org/privilege/filesystem.write"/>
+ <tizen:privilege name="http://tizen.org/privilege/unlimitedstorage"/>
+ <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+ <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+ <tizen:profile name="tv-samsung"/>
+ <tizen:service id="severtvapp.svc" auto-restart="true" on-boot="true">
+  <tizen:content src="service/main.js"/><tizen:name>TIZYService</tizen:name>
+  <tizen:description>TIZY background VPN service. Uses the local privileged service.</tizen:description>
+ </tizen:service>
+ <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+</widget>

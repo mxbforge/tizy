@@ -1,0 +1,24 @@
+const assert=require('node:assert/strict'),net=require('node:net');
+const Happ=require('../app/service/happ-pairing');
+const sample='vless://00000000-0000-4000-8000-000000000001@example.invalid:443?security=tls#TIZY-interop-test';
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function send(view,data){const info=JSON.parse(Buffer.from(view.qr.split('/').pop(),'base64'));await new Promise((resolve,reject)=>{const s=net.connect(info.port,info.ip,()=>s.end(data));s.on('error',e=>{if(e.code!=='ECONNRESET')reject(e);});s.on('close',resolve);});await sleep(10);return info;}
+(async()=>{let saved=[],pendingResolve;
+const p=new Happ((text,valid)=>{assert.ok(valid());saved.push(text);return Promise.resolve();},{autoImport:false,host:'127.0.0.1',lifetime:1500});
+try{
+const view=await p.start(),info=JSON.parse(Buffer.from(view.qr.slice('happ://send_to_device/'.length),'base64'));assert.match(info.uid,/^TIZY-[a-f0-9]{32}$/);assert.equal(info.ip,'127.0.0.1');assert.ok(info.port>0);assert.equal(view.code,undefined);
+await send(view,sample+'\r\n');assert.equal(p.view.phase,'confirm');assert.equal(saved.length,0);assert.equal(p.view.qr,undefined);assert.equal(JSON.stringify(p.view).includes('00000000'),false);await p.accept();assert.deepEqual(saved,[sample]);assert.equal(p.view.phase,'received');await assert.rejects(p.accept(),/Нет данных/);
+const cancelled=await p.start();await send(cancelled,sample);await p.cancel();await assert.rejects(p.accept());assert.equal(saved.length,1);await assert.rejects(send(cancelled,sample));
+const bad=await p.start();await send(bad,'happ://crypt5/secret');assert.equal(p.view.phase,'error');assert.match(p.view.error,/Зашифрованные/);assert.equal(p.pending,null);await send(await p.start(),Buffer.from([0xff,0xfe]));assert.match(p.view.error,/Некорректные/);await send(await p.start(),'x'.repeat(524289));assert.equal(p.view.phase,'error');await p.cancel();
+assert.equal(Happ.normalize(sample+'\nhttps://example.invalid/sub'),sample+'\nhttps://example.invalid/sub');assert.equal(Happ.normalize('happ://add/'+sample),sample);assert.throws(()=>Happ.normalize('https://a:b@example.invalid/'));assert.throws(()=>Happ.normalize('file:///etc/passwd'));assert.throws(()=>Happ.normalize(Array(202).fill(sample).join('\n')));
+const expired=new Happ(()=>Promise.resolve(),{autoImport:false,host:'127.0.0.1',lifetime:30});let v=await expired.start();await send(v,sample);await sleep(40);assert.equal(expired.view.phase,'expired');assert.equal(expired.pending,null);await assert.rejects(expired.accept());await expired.cancel();
+const denied=new Happ(()=>Promise.resolve(),{autoImport:false,host:'127.0.0.1',allow:()=>false});v=await denied.start();await send(v,sample);assert.equal(denied.pending,null);assert.equal(denied.view.phase,'waiting');await denied.cancel();
+const racing=new Happ((text,valid)=>new Promise(resolve=>{pendingResolve=()=>{if(valid())saved.push(text);resolve();};}),{autoImport:false,host:'127.0.0.1'});v=await racing.start();await send(v,sample);const accepting=racing.accept();await sleep(1);await racing.cancel();pendingResolve();await accepting;assert.equal(racing.view.phase,'idle');assert.equal(saved.length,1);
+let autoSaved=[],doneImport;const automatic=new Happ((text,valid)=>new Promise(resolve=>{doneImport=()=>{if(valid())autoSaved.push(text);resolve();};}),{host:'127.0.0.1',idleTimeout:20});
+let av=await automatic.start();await send(av,'');assert.equal(automatic.view.phase,'waiting','Empty connection probes must not invalidate the QR');
+const ai=JSON.parse(Buffer.from(av.qr.split('/').pop(),'base64'));let client=net.connect(ai.port,ai.ip);client.on('error',()=>{});await new Promise(r=>client.once('connect',r));client.write(sample+'\n');await sleep(50);assert.equal(automatic.view.phase,'importing','Newline-terminated sender need not close socket');await automatic.cancel(undefined,true);assert.equal(automatic.view.phase,'importing');doneImport();await automatic.completed;assert.equal(automatic.view.phase,'received');assert.deepEqual(autoSaved,[sample]);client.destroy();await automatic.cancel();
+const eof=new Happ(async(text)=>{autoSaved.push(text);},{host:'127.0.0.1'});av=await eof.start();await send(av,sample);await eof.completed;assert.equal(eof.view.phase,'received');await eof.cancel();
+const badAuto=new Happ(async()=>{}, {host:'127.0.0.1'});av=await badAuto.start();await send(av,'happ://crypt5/secret');assert.equal(badAuto.view.phase,'error');assert.match(badAuto.view.error,/Зашифрованные/);assert.equal(JSON.stringify(badAuto.view).includes('/secret'),false);await badAuto.cancel();
+console.log('Happ QR schema, native TCP framing, confirmation, cancellation, expiry, limits, source restriction and malformed links: passed');
+}finally{await p.cancel();}
+})().catch(e=>{console.error(e);process.exitCode=1});

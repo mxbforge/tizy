@@ -1,0 +1,19 @@
+{
+  "version": "26.10.31",
+  "source": "https://github.com/XTLS/Xray-core/tree/v26.10.31",
+  "modified": false,
+  "binaries": [
+    {
+      "path": "app/core/xray",
+      "sha256": "2a893d5b5f7cf5a33168c102f01771ed69a674abeab0b8fb085b1ddf098cf52c",
+      "archive": "https://github.com/XTLS/Xray-core/releases/download/v26.10.31/Xray-linux-arm32-v7a.zip",
+      "archiveDigest": "sha256:2387f55239ee7799fd67d5382e79f589c1da07a97d993e86b058f2290b8e456b"
+    },
+    {
+      "path": "app/core/xray-arm64",
+      "sha256": "5939649960deaf535bcd5f7ce0467a2b1d63b72a2758a6f42eade714ae8d5328",
+      "archive": "https://github.com/XTLS/Xray-core/releases/download/v26.10.31/Xray-linux-arm64-v8a.zip",
+      "archiveDigest": "sha256:1811c8f1da0c3b6dc707ebaf1c8390e987ba39859a8f0a7aadd8526157f2ec8d"
+    }
+  ]
+}

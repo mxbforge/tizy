@@ -1,0 +1,22 @@
+{
+  "name": "tizy",
+  "version": "0.14.4",
+  "private": true,
+  "description": "Samsung Tizen TV VPN client using Xray and Vetro root integration",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "python3 build.py --portable",
+    "test": "node tools/test.cjs unit",
+    "test:integration": "node tools/test.cjs integration",
+    "test:ui": "node tests/ui.cjs",
+    "test:package": "node tests/universal-package.cjs",
+    "verify:public": "python3 tools/verify_public.py",
+    "test:layout": "node tests/server-layout.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "26.1.0"
+  }
+}

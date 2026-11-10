@@ -1,0 +1,23 @@
+const assert=require('node:assert/strict'),f=require('../app/service/ip-family'),p=require('../app/service/profiles');
+assert.equal(f.host('[2001:0db8:0:0:0:0:0:1]'),'2001:db8::1');
+assert.equal(f.host('::ffff:192.0.2.1'),'192.0.2.1');
+assert.equal(f.host('vpn.example.org'),'vpn.example.org');
+for(const host of ['[example.org]','[2001:db8::1','2001:db8::1]'])assert.throws(()=>f.host(host));
+for(const bad of ['ipv5','',null,{}])assert.throws(()=>f.mode(bad));
+assert.equal(f.strategy(),'AsIs');assert.equal(f.strategy('ipv4'),'ForceIPv4');assert.equal(f.strategy('ipv6'),'ForceIPv6');
+assert.throws(()=>f.validate({host:'[2001:db8::1]'},'ipv4'),/IPv6/);
+assert.throws(()=>f.validate({host:'192.0.2.1'},'ipv6'),/IPv4/);
+assert.equal(f.validate({host:'vpn.example.org'},'ipv6'),'ipv6');
+const records=[1,2,3,4,5].map(i=>({address:'192.0.2.'+i,family:4})).concat([{address:'2001:db8::1',family:6},{address:'2001:db8::1',family:6}]);
+assert.deepEqual(f.candidates(records,'ipv6'),[{address:'2001:db8::1',family:6}]);
+assert.equal(f.candidates(records,'auto').length,4);assert.equal(f.candidates(records,'auto')[1].family,6);
+assert.equal(f.candidates(records,'ipv4').every(x=>x.family===4),true);
+assert.throws(()=>f.candidates(records.slice(0,1),'ipv6'),/нет IPv6/);
+const uuid='11111111-2222-4333-8444-555555555555',ip='2001:db8::1';
+const links=['vless://'+uuid+'@['+ip+']:443?type=xhttp&security=tls&sni=vpn.example.org','trojan://password@['+ip+']:443?sni=vpn.example.org','vmess://'+Buffer.from(JSON.stringify({add:'['+ip+']',port:443,id:uuid,net:'ws',tls:'tls',sni:'vpn.example.org'})).toString('base64'),'ss://'+Buffer.from('aes-128-gcm:password').toString('base64')+'@['+ip+']:443'];
+for(const link of links){const server=p.parse(link),c=p.config(server,'tv','ipv6'),o=c.outbounds[0];assert.equal(server.host,ip);assert.equal((o.settings.vnext||o.settings.servers)[0].address,ip);assert.equal(o.streamSettings.sockopt.domainStrategy,'ForceIPv6');assert.throws(()=>p.config(server,'tv','ipv4'));assert.equal(p.config(server).outbounds[0].streamSettings.sockopt.domainStrategy,'AsIs');if(o.streamSettings.tlsSettings)assert.equal(o.streamSettings.tlsSettings.serverName,'vpn.example.org');if(o.streamSettings.wsSettings)assert.equal(o.streamSettings.wsSettings.headers.Host,'['+ip+']');if(o.streamSettings.xhttpSettings)assert.equal(o.streamSettings.xhttpSettings.host,'['+ip+']');}
+const imported=p.fromIncy({protocol:'vless',address:'['+ip+']',port:443,uuid,network:'tcp'});assert.equal(imported.host,ip);
+const split=p.parse(links[0]);split.xhttpExtra={downloadSettings:{address:'['+ip+']',port:443,network:'xhttp',security:'tls',sockopt:{tcpKeepAliveIdle:90,domainStrategy:'UseIPv4'},tlsSettings:{serverName:'download.example.org'}}};
+const source=JSON.stringify(split.xhttpExtra),download=p.config(split,'tv','ipv6').outbounds[0].streamSettings.xhttpSettings.extra.downloadSettings;assert.equal(download.address,ip);assert.equal(download.sockopt.domainStrategy,'ForceIPv6');assert.equal(download.sockopt.tcpKeepAliveIdle,90);assert.equal(download.tlsSettings.serverName,'download.example.org');assert.equal(JSON.stringify(split.xhttpExtra),source,'Generating a config must preserve the imported source');
+assert.throws(()=>f.validate({...split,host:'example.org'},'ipv4'),/IPv6/);assert.equal(p.config(split).outbounds[0].streamSettings.xhttpSettings.extra.downloadSettings.sockopt.domainStrategy,'AsIs');
+console.log('IPv6 URI/QR normalization, SNI and HTTP authority, strict family policy and dual-stack ping candidates: passed');

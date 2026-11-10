@@ -1,0 +1,1 @@
+window.TIZY_DISTRIBUTABLE=true;

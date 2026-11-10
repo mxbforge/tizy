@@ -1,0 +1,14 @@
+montserrat_bold.ttf
+Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+
+montserrat_medium.ttf
+Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+
+montserrat_regular.ttf
+Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+
+montserrat_semibold.ttf
+Copyright 2011 The Montserrat Project Authors (https://github.com/JulietaUla/Montserrat)
+
+tizy_cjk_sc_regular.otf
+© 2014-2021 Adobe (http://www.adobe.com/).

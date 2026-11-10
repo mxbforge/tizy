@@ -1,0 +1,5 @@
+const assert=require('assert'),Pairing=require('../app/service/v2raytun-pairing'),WebSocket=require('../deps/node_modules/ws');
+const sample='vless://00000000-0000-4000-8000-000000000001@example.invalid:443?security=tls#TIZY-relay-test';
+(async()=>{let received;const p=new Pairing(async(payload,valid)=>{assert.ok(valid());received=payload;});let sender;
+try{const view=await p.start();assert.match(view.qr,/^[a-f0-9]{32}$/);sender=new WebSocket(Pairing.endpoint,{handshakeTimeout:12000,maxPayload:524288,perMessageDeflate:false});await new Promise((resolve,reject)=>{sender.once('open',resolve);sender.once('error',reject);});sender.send(JSON.stringify({action:'PUT',key:view.qr,value:sample}));for(let i=0;i<100&&!received;i++)await new Promise(r=>setTimeout(r,100));assert.equal(received.text,sample);await p.completed;assert.equal(p.view.phase,'received');console.log('Live official v2RayTun relay: own subscription, synthetic transfer and successful receive passed');}
+finally{p.cancel();if(sender)sender.close();}})().catch(e=>{console.error(e.message);process.exitCode=1});

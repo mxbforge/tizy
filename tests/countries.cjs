@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const Countries=require('../app/service/countries'),Flags=require('../app/country-flags');
+assert.equal(Flags.normalise('gb'),'GB');for(const bad of [null,'../../gb','<img>','G','GBR'])assert.equal(Flags.normalise(bad),null);
+(async()=>{const dir=fs.mkdtempSync(path.join(os.tmpdir(),'tizy-country-')),file=path.join(dir,'countries.json');let calls=0;
+ const c=new Countries({file,resolve:async(host,choice)=>choice==='ipv6'?'2001:4860:4860::8888':'8.8.8.8',lookup:async address=>{calls++;return address.includes(':')?'US':'GB';}});
+ try{const p={id:'one',host:'vpn.example'},same={id:'two',host:'vpn.example'};assert.equal(c.peek(p,null,'auto'),null);await c.refresh([p,same],()=>null,'auto','one');assert.equal(calls,1);assert.equal(c.peek(p,null,'auto'),'GB');assert.equal(c.peek(same,null,'auto'),'GB');await c.refresh([p],()=>null,'auto','one');assert.equal(calls,1);
+ await c.ensure(p,null,'ipv6');assert.equal(c.peek(p,null,'ipv6'),'US');assert.equal(c.peek(p,'2001:4860:4860::8888','auto'),'US','Actual peer address overrides a DNS-family country');
+ assert.equal(fs.statSync(file).mode&0o777,0o600);const reloaded=new Countries({file,lookup:async()=>{throw Error('Must use cache');}});assert.equal(await reloaded.ensure({host:'8.8.8.8'},null,'auto'),'GB');reloaded.close();
+ const prior=calls;assert.equal(await c.ensure({host:'192.168.2.1'},null,'auto'),null);assert.equal(calls,prior,'Private addresses must never go to the geolocation provider');await assert.rejects(Countries.lookupCountry('127.0.0.1'));
+ const failed=new Countries({lookup:async()=>{calls++;throw Error('Offline');}});assert.equal(await failed.ensure({host:'1.1.1.1'},null,'auto'),null);const count=calls;assert.equal(await failed.ensure({host:'1.1.1.1'},null,'auto'),null);assert.equal(calls,count,'Failures must back off instead of querying on every UI poll');failed.close();
+ let active=0,max=0;const bounded=new Countries({lookup:async()=>{active++;max=Math.max(max,active);await new Promise(r=>setTimeout(r,15));active--;return 'US';}});await bounded.refresh([1,2,3,4,5].map(i=>({id:String(i),host:'8.8.8.'+i})),()=>null,'auto','5');assert.ok(max<=2);bounded.close();
+ const dirty=JSON.parse(fs.readFileSync(file,'utf8'));dirty['127.0.0.1']={code:'US',at:Date.now()};dirty['9.9.9.9']={code:'../../',at:Date.now()};fs.writeFileSync(file,JSON.stringify(dirty));const safe=new Countries({file});assert.equal(safe.peek({host:'127.0.0.1'},null,'auto'),null);assert.equal(safe.peek({host:'9.9.9.9'},null,'auto'),null);safe.close();
+ console.log('Country ISO allowlist, IPv4/IPv6 and actual-peer priority, deduplication, private-address guard, persistent cache, concurrency and failure backoff: passed');
+ }finally{c.close();fs.rmSync(dir,{recursive:true,force:true});}})().catch(e=>{console.error(e);process.exitCode=1});
