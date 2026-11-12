@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
+    "acorn": "8.15.0",
+    "libsodium-sumo": "0.7.9",
+    "libsodium-wrappers-sumo": "0.7.9",
+    "ws": "5.2.4"
+  }
+}

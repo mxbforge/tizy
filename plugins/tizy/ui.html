@@ -1,0 +1,2410 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>TIZY · Vetro</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--surface:#191c25;--raised:#192943;--border:#344360;--text:#f5f8ff;--muted:#aab8d1;--accent:#8fbaff;--action:#123bb5;--ok:#7fcba0;--danger:#ef8a80;font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}*{box-sizing:border-box}body{margin:0 auto;padding:16px;max-width:1200px}body.home-page{height:100vh;display:flex;flex-direction:column;overflow:hidden}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-shrink:0}.brand{color:#6699ff;font-family:system-ui,-apple-system,sans-serif;font-size:30px;line-height:1.2;letter-spacing:5px;font-weight:800}.muted{color:var(--muted);font-size:12px}.badge{padding:4px 10px;border:1px solid var(--border);border-radius:20px}nav{display:flex;flex-shrink:0;margin-bottom:12px}button,select,textarea{font:inherit;color:inherit}button,select{height:40px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:var(--raised);color:inherit;font:inherit;margin:0 8px 0 0}button{cursor:pointer}button:hover{background:#22324b}button:focus,select:focus,textarea:focus,input:focus{outline:none;box-shadow:none}button:focus,select:focus{background:#2b3d56}button:disabled,select:disabled,input:disabled{opacity:.5;cursor:default}button.active{background:#354b68;border-color:var(--border);color:var(--text);font-weight:600}button.active:hover,button.active:focus{background:#405979}button.primary{background:var(--action);border-color:var(--action);color:#f5f8ff;font-weight:600}.panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;margin:0 0 16px}.hidden{display:none!important}#home{flex:1;min-height:0;display:flex}.hero{display:grid;grid-template-columns:minmax(100px,.65fr) minmax(0,1.35fr);align-items:center;text-align:center;flex:1;min-height:0;margin:0;padding:16px}.power-block,.server-block{min-width:0}.server-block{font-family:system-ui,-apple-system,sans-serif}.server-block .muted{font-size:14px}.power{display:block;width:130px;height:130px;border-radius:50%;font-size:64px;line-height:1;margin:10px auto;background:#262d40;color:#a4bfff;border:2px solid #496395}.power:hover,.power:focus{background:#303a50;filter:brightness(1.12)}.power.connected{background:#163f34;border-color:#4dd8a2;color:#80f4c4}h1{font-size:26px;line-height:1.25;margin:8px 0;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}h2{font-size:16px;margin:0 0 12px}.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:16px}.metric{padding:8px 4px;min-width:0}.metric strong{display:block;font-size:24px;line-height:1.3;margin-bottom:4px;white-space:nowrap}#message{white-space:pre-wrap;color:var(--danger);font-size:12px;margin:0 0 12px;flex-shrink:0}body.home-page #message{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#message:empty,body.home-page #message:empty{display:none}.row{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:12px;margin-top:10px;padding:14px}.row.selected{border-color:#6699ff80;background:#6699ff14}.row.selected strong:after{content:"✓";display:inline-block;margin-left:10px;color:#6699ff;font-weight:600}.row strong{display:block;overflow-wrap:anywhere}.row small{color:var(--muted)}textarea{width:100%;min-height:100px;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin:12px 0}label{display:block;margin:12px 0}.switch{display:flex;align-items:center;margin:12px 0;cursor:pointer;width:max-content;max-width:100%}.switch input{appearance:none;-webkit-appearance:none;width:40px;height:24px;margin:0 12px 0 0;border:1px solid var(--border);border-radius:99px;background:#494b53;position:relative;flex-shrink:0;cursor:pointer}.switch input:before{content:"";position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#ccc;transition:transform .12s,background .12s}.switch input:checked{background:rgba(76,219,131,.314)}.switch input:checked:before{transform:translateX(16px);background:#4cdb83}.switch input:disabled{opacity:.45;cursor:default}.field{display:flex;flex-direction:column;margin:12px 0;max-width:360px}.field span{color:var(--muted);font-size:12px;margin-bottom:4px}.field select{width:100%;margin:0}.events{font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:240px;overflow:auto}.row button{margin:0 0 0 8px}.note{line-height:1.5;color:var(--muted);font-size:12px;margin:8px 0}.settings-layout{display:grid;grid-template-columns:210px minmax(0,1fr);align-items:start}.settings-rail{display:flex;flex-direction:column;margin:0 16px 0 0}.settings-rail button{text-align:left;height:auto;min-height:40px;margin:0 0 8px;padding:8px 12px}.settings-pane{min-width:0}.toolbar{margin-top:12px}.app-option{display:flex;align-items:center}input[type=checkbox]:not([role=switch]){width:18px;height:18px;margin-right:10px;accent-color:var(--action)}@media(max-height:450px){.hero h1{-webkit-line-clamp:1}body{padding:10px}header,nav{margin-bottom:8px}nav button{height:34px}.hero{padding:10px}.metrics{margin-top:8px}.power{margin:6px auto}}@media(max-width:600px){body{padding:12px}.settings-layout{grid-template-columns:1fr}.settings-rail{flex-direction:row;flex-wrap:wrap;margin:0 0 8px}.settings-rail button{margin-right:8px}.row{display:block}.row button{margin:12px 8px 0 0}.hero{grid-template-columns:minmax(70px,.55fr) minmax(0,1.45fr);padding:12px}.metrics{margin-top:10px}.metric strong{font-size:16px}.power{width:70px;height:70px;font-size:38px}}@media(prefers-reduced-motion:reduce){.switch input:before{transition:none}}
+@media(max-height:300px){body.home-page #message{-webkit-line-clamp:1}body.home-page{padding:8px}header,nav{margin-bottom:6px}nav button{height:30px}.hero{padding:8px}.hero h1{-webkit-line-clamp:1;font-size:16px;margin:4px 0;line-height:1.2}.metrics{margin-top:4px}.metric{padding:4px 2px}.metric strong{font-size:15px;margin-bottom:2px}.power{width:60px;height:60px;font-size:32px;margin:4px auto}#message{font-size:11px;margin-bottom:6px}}#header-add{margin-left:auto;margin-right:0;display:inline-flex;align-items:center;white-space:nowrap}#header-add span+span{margin-left:8px}.page-top{display:flex;align-items:center;margin-bottom:16px}.page-top h2{margin:0 0 0 8px}.add-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:20px}.pair-column{text-align:center}.pair-protocol{display:flex;justify-content:center;margin:16px 0}.pair-protocol button:last-child{margin-right:0}.qr-box{width:180px;height:180px;max-width:100%;background:#fff;border-radius:12px;margin:12px auto 8px;display:flex;align-items:center;justify-content:center;color:#111}.qr-box:empty{background:var(--raised)}.qr-box svg{display:block;width:100%;height:100%;border-radius:12px}.pair-code{font-size:24px;font-weight:700;letter-spacing:4px;min-height:36px}.pair-steps{padding-left:20px;margin-top:24px;color:var(--muted);line-height:1.8;font-size:14px}.import-column textarea{min-height:140px;resize:none}@media(max-width:600px){#header-add span+span{margin-left:5px}nav>button{padding-left:8px;padding-right:8px;margin-right:5px;font-size:13px}.add-grid{grid-template-columns:1fr}.pair-protocol button{font-size:14px}}.pair-code:empty,#pair-expiry:empty,#pair-state:empty{display:none}.routing-heading{display:flex;align-items:baseline;justify-content:space-between;column-gap:16px;row-gap:4px;flex-wrap:wrap;margin:12px 0 4px}.routing-heading label,.routing-heading .note{margin:0;font-size:12px}.routing-controls{display:flex;align-items:center;margin:8px 0 12px}.routing-controls select{flex:1;min-width:0;max-width:360px;margin-right:10px}.routing-controls button{flex-shrink:0;margin:0;white-space:nowrap}#apps{max-height:320px;max-height:min(320px,45vh);overflow-y:auto;overscroll-behavior:contain;scrollbar-color:#53647e var(--surface);scrollbar-width:thin}#apps .app-option{margin:0;padding:4px;min-height:28px;line-height:20px}#apps .app-option input{margin:0 10px 0 0;flex-shrink:0}#apps:empty{display:none}.servers-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.servers-heading h2{margin-bottom:0}.servers-heading .note{margin:3px 0 0}.server-actions{display:flex;align-items:center;position:relative;flex-shrink:0}.server-more{font-size:24px;line-height:1;width:36px;padding:0}.server-latency{display:inline-block;min-width:84px;text-align:right;font-size:12px;color:var(--muted);margin-right:8px}.server-menu{position:absolute;right:0;top:calc(100% + 4px);z-index:20;background:#26344b;border-radius:10px;padding:6px;box-shadow:0 8px 24px #0007;min-width:130px}.row .server-menu button{display:block;width:100%;margin:0;text-align:left;background:transparent;border:0}.row .server-menu button:hover{background:#354b68}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:50;max-width:calc(100vw - 32px);padding:12px 20px;border-radius:12px;background:#30445e;color:#fff;box-shadow:0 6px 24px #0007;text-align:center}#routing-description{margin:4px 0}#routing-note{margin:4px 0 8px}@media(max-width:600px){.server-actions{margin-top:8px;justify-content:flex-end}.server-menu{right:0}.server-latency{min-width:70px}}.row .server-more{height:26px;width:22px;border:0;border-radius:5px;background:transparent;box-shadow:none;font-size:24px;color:var(--muted);display:inline-flex;align-items:center;justify-content:center}.row .server-more:hover,.row .server-more:focus,.row .server-more[aria-expanded="true"]{background:rgba(190,210,255,.045);color:var(--accent);-webkit-backdrop-filter:blur(12px) saturate(140%);backdrop-filter:blur(12px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 1px 5px rgba(0,0,0,.06)}#ping{display:inline-flex;align-items:center;justify-content:center;height:32px;padding:0 12px;font-size:13px;border-radius:10px;background:#9966dd1a;border-color:#9966dd4d;color:var(--text)}#ping:hover,#ping:focus{background:#45345e;border-color:#9966dd}.ping-icon{width:16px;height:16px;fill:none;stroke:#9966dd;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-right:6px;flex-shrink:0}.row .server-choose{height:32px;padding:0 12px;font-size:13px;line-height:1.4;border:1px solid #6699ff4d;border-radius:10px;background:#6699ff14;color:var(--text)}.row .server-choose:hover,.row .server-choose:focus{background:#314164;border-color:#6699ff}.server-menu{padding:4px;border-radius:2px;background:rgba(30,39,56,.94);border:1px solid rgba(150,170,210,.13);min-width:0;width:max-content;overflow:hidden;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.row .server-menu button{height:32px;padding:0 10px;font-size:13px;line-height:1.4;background:transparent;border:0;border-radius:1px;color:var(--text)}.row .server-menu button:hover{background:#6699ff24}.menu-symbols{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}.menu-icon{display:block;width:18px;height:18px;margin-right:8px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}button[data-tab],button[data-setting]{position:relative;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid transparent;color:#b3b3b3;font-weight:500;border-radius:12px}button[data-tab].active{background:#6699ff29;border-color:#6699ff40;color:#6699ff;font-weight:600}button[data-tab].active:after{content:"";position:absolute;left:12px;right:12px;bottom:3px;height:3px;background:#6699ff;border-radius:3px}button[data-tab]:hover,button[data-tab]:focus{background:#314164;color:#6699ff;box-shadow:none;outline:none}.settings-layout{grid-template-columns:240px minmax(0,1fr)}.settings-rail{border-right:1px solid #2d3038;padding-right:12px}.settings-rail button[data-setting]{justify-content:flex-start}.settings-rail button[data-setting].active{background:#6699ff1c;border-color:#6699ff36;color:#6699ff;font-weight:500}.settings-rail button[data-setting]:hover,.settings-rail button[data-setting]:focus{background:#26334b;color:#6699ff;box-shadow:none;outline:none}#header-add{background:#6699ff14;border-color:#6699ff4d}#header-add>span[aria-hidden]{color:#6699ff}#header-add:hover,#header-add:focus{background:#314164}@media(max-width:600px){button[data-tab] .menu-icon{display:none}.settings-layout{grid-template-columns:1fr}.settings-rail{border-right:0;padding-right:0}.settings-rail .menu-icon{width:16px;height:16px;margin-right:6px}}.topbar{display:flex;align-items:center;justify-content:flex-start;position:relative}.topbar .brand{flex-shrink:0;margin-right:18px}.topbar>nav{flex:1;min-width:0;align-items:center;margin-bottom:0}.status-pill{margin-left:auto;margin-right:12px;display:inline-flex;align-items:center;justify-content:center;padding:7px 12px;border-radius:24px;color:#999;background:#363638;font-size:13px;line-height:20px;font-weight:600;white-space:nowrap;flex-shrink:0}.status-pill i{width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:8px;flex-shrink:0}.status-pill.connected{background:#4cdb831a;color:#4cdb83}.status-pill.connecting{background:#6699ff1a;color:#6699ff}.topbar #header-add{margin-left:0;flex-shrink:0}@media(min-width:601px) and (max-width:900px){.topbar button[data-tab]{padding:0 9px;font-size:13px;margin-right:5px}.topbar .menu-icon{width:16px;height:16px;margin-right:6px}.status-pill{font-size:12px;padding:6px 9px;margin-right:8px}.topbar #header-add{font-size:13px;padding:0 9px}}@media(max-width:600px){.topbar{display:block}.topbar .brand{margin:0 0 8px}.topbar>nav{width:100%}.status-pill{position:absolute;top:0;right:0;margin:0;max-width:calc(100% - 110px);font-size:12px;padding:6px 9px}.topbar #header-add{margin-left:auto}}.rename-overlay{position:fixed;inset:0;z-index:60;background:#0008;display:flex;align-items:center;justify-content:center;padding:16px}.rename-dialog{width:100%;max-width:420px;margin:0}.rename-dialog input{display:block;width:100%;height:40px;margin:8px 0 16px;padding:0 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}.rename-dialog label{margin:0}.rename-dialog .rename-error{color:var(--danger);font-size:12px}.rename-dialog .rename-error:empty{display:none}.row .server-menu button+button{margin-top:0}
+.home-server-tile,.metric{border:1px solid var(--tile-border,rgba(143,170,210,.16));background:var(--tile-bg,rgba(34,39,51,.4));border-radius:16px}.home-server-tile{padding:16px;text-align:left}.home-card-heading{display:flex;align-items:center;justify-content:space-between;width:100%;height:auto;min-height:28px;margin:0;padding:0;text-align:left;font:inherit;background:transparent;border:0;border-radius:0;border-bottom:1px solid var(--tile-divider,rgba(143,170,210,.12));padding-bottom:8px;margin-bottom:8px}.home-card-heading:hover,.home-card-heading:focus{background:transparent;color:var(--accent)}.home-card-arrow{width:18px;height:18px;margin-left:12px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.home-server-tile #protocol{font-size:12px;line-height:1.5;white-space:nowrap;flex-shrink:0}.home-peer-line{display:flex;align-items:center;column-gap:8px;row-gap:4px;flex-wrap:wrap;min-width:0}.home-peer-line .home-latency{margin:0;font-size:12px;background:#6699ff1a;color:#6699ff;padding:2px 5px;border-radius:5px;white-space:nowrap}.home-ip-family{font-size:10px;color:#6699ff;border:1px solid #6699ff40;background:#6699ff18;border-radius:4px;padding:1px 4px;white-space:nowrap}.home-ip{font-size:12px;color:var(--muted);min-width:0;overflow-wrap:anywhere}.home-ip-family:empty,.home-ip:empty{display:none}#home-protocol,#home-security{color:#6699ff}.protocol-separator{color:var(--muted)}.home-server-tile h1{margin:8px 0;font-size:22px}.metric strong{font-size:20px;max-width:100%;overflow:hidden;text-overflow:ellipsis}.metrics{column-gap:12px;margin-top:14px}.metric{padding:14px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center}.home-icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.metric .home-icon{margin-bottom:8px}.metric-upload .home-icon{color:#6699ff}.metric-uptime .home-icon{color:#4cdb83}.metric-download .home-icon{color:#9966dd}.home-actions{display:flex;justify-content:center;flex-wrap:wrap;margin-top:12px;gap:8px}.home-actions button{display:inline-flex;align-items:center;justify-content:center;height:32px;padding:0 10px;margin:0;font-size:13px;border-radius:10px;white-space:nowrap}.home-actions .home-icon{width:16px;height:16px;margin-right:6px}#home-refresh{background:#6699ff14;border-color:#6699ff4d}#home-refresh .home-icon{color:#6699ff}#home-refresh:hover,#home-refresh:focus{background:#314164}#home-ping{background:#9966dd1a;border-color:#9966dd4d}#home-ping .home-icon{color:#9966dd}#home-ping:hover,#home-ping:focus{background:#45345e}.home-latency{color:#6699ff;font-size:12px;margin-top:6px}.home-latency:empty{display:none}
+@media(max-height:450px){.home-server-tile{padding:10px}.home-card-heading{padding-bottom:4px;margin-bottom:4px}.metric{padding:8px 4px}.metric .home-icon{width:16px;height:16px;margin-bottom:4px}.metrics{column-gap:8px;margin-top:8px}.home-actions{margin-top:8px}.home-actions button{height:28px;font-size:12px}}
+@media(max-width:600px){.home-actions{gap:6px}.home-actions button{height:28px;padding:0 8px;font-size:12px}.home-actions .home-icon{display:none}.home-server-tile{padding:10px}.metric{padding:10px 2px}.metrics{column-gap:6px}.metric .muted{font-size:11px}.server-block .home-card-heading{font-size:12px}}
+@media(max-height:300px){.home-server-tile{padding:6px 10px;border-radius:10px}.home-card-heading{font-size:11px!important;padding-bottom:2px;margin-bottom:2px}.home-server-tile h1{margin:3px 0}.home-server-tile #protocol{font-size:11px}.metric{padding:4px 2px;border-radius:10px}.metric .home-icon{display:none}.metric .muted{font-size:11px}.home-actions{margin-top:6px;gap:6px}.home-actions button{height:24px;font-size:11px}.home-actions .home-icon{display:none}.home-latency{margin-top:2px;font-size:10px}}
+
+
+.power{position:relative;overflow:visible;transition:background-color .25s,border-color .25s,color .25s}.power:disabled{opacity:1}.power-symbol{position:absolute;left:25%;top:25%;width:50%;height:50%;fill:none;stroke:currentColor;stroke-width:3.5;stroke-linecap:round;pointer-events:none}.power-ring{position:absolute;top:0;right:0;bottom:0;left:0;border:0;border-radius:50%;opacity:0;box-shadow:0 0 18px rgba(76,219,131,.28),inset 0 0 18px rgba(76,219,131,.18);pointer-events:none}.power-spinner{display:none;position:absolute;left:-3px;top:-3px;width:calc(100% + 6px);height:calc(100% + 6px);fill:none;stroke:#6699ff;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:75 215;pointer-events:none;transform-origin:center}.power.connecting{background:#22324b;color:#8fbaff;border-color:#6699ff33}.power.connecting .power-spinner{display:block;animation:tizy-power-spin 1s linear infinite}.power.connected .power-ring{animation:tizy-power-breathe 2400ms ease-in-out infinite}.power:active:not(:disabled) .power-symbol{transform:scale(.94)}body:not(.home-page) .power.connected .power-ring,body:not(.home-page) .power.connecting .power-spinner{animation-play-state:paused}@keyframes tizy-power-spin{to{transform:rotate(360deg)}}@keyframes tizy-power-breathe{0%,100%{opacity:.3}50%{opacity:.9}}@media(prefers-reduced-motion:reduce){.power{transition:none}.power.connected .power-ring,.power.connecting .power-spinner{animation:none}.power.connected .power-ring{opacity:.45}.power:active:not(:disabled) .power-symbol{transform:none}}
+#pair-qr.received{background:transparent}#pair-qr>.pair-success{width:170px;height:170px;color:#4cdb83;overflow:visible;transform-origin:50% 50%;animation:pair-success-pulse .65s .54s ease-in-out both}.pair-success path{stroke-dasharray:84;stroke-dashoffset:0;animation:pair-success-write .54s cubic-bezier(.3,0,.3,1) both}@keyframes pair-success-write{from{stroke-dashoffset:84}to{stroke-dashoffset:0}}@keyframes pair-success-pulse{0%,100%{transform:scale(1)}40%{transform:scale(.92)}72%{transform:scale(1.05)}}@media(prefers-reduced-motion:reduce){#pair-qr>.pair-success,.pair-success path{animation:none}}
+.migration-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}.migration-row button{margin:0;flex-shrink:0}.migration-row .note{flex:1;min-width:200px;margin:0}.routing-summary{display:flex;align-items:center;gap:12px;margin:4px 0 8px}.routing-summary #save-apps{flex-shrink:0;margin:0}.routing-summary-text{min-width:0}.routing-summary #routing-description,.routing-summary #routing-note{margin:0;line-height:1.5}#pair-qr.loading{background:var(--raised)}#pair-qr.loading:after{content:'';display:block;width:76px;height:76px;border-radius:50%;border:6px solid transparent;border-top-color:#6699ff;border-right-color:#6699ff;animation:tizy-qr-spin 800ms linear infinite}#pair-qr.loading>svg{display:none}@keyframes tizy-qr-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){#pair-qr.loading:after{animation:none}}
+.log-filter{margin:16px 0}.log-filter>b{display:block;margin-bottom:8px;font-weight:600}.log-options{display:flex;flex-wrap:wrap;gap:8px}.log-options button{height:auto;min-height:34px;margin:0;padding:6px 12px;border-radius:10px;border-color:#6699ff4d;background:#6699ff0d;font-size:13px}.log-options button[aria-checked=true]{background:#6699ff29;border-color:#6699ff80;color:#8fbaff}.log-options button:hover{background:#314164}#logs .switch small{display:block;font-size:12px;font-weight:400;color:var(--muted);margin-top:3px}#logs .switch b{font-weight:600}.log-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid #ffffff0d;padding-top:12px;margin:16px 0 12px}.log-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.log-actions button,.log-actions select{height:34px;margin:0;padding:0 10px;font-size:12px;border-radius:10px;background:#6699ff14;border-color:#6699ff4d}.log-actions select{max-width:100%}.log-actions button:hover{background:#314164}#log-clear{background:transparent;border-color:#ffffff26;color:var(--muted)}#events{max-height:360px;max-height:min(360px,48vh);overflow-y:auto;white-space:normal;border:1px solid #ffffff14;border-radius:12px;padding:0 14px;scrollbar-width:thin}.log-event{padding:12px 0;border-bottom:1px solid #ffffff0d}.log-event:last-child{border:0}.log-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:11px;color:var(--muted);margin-bottom:4px}.log-badge{color:#6699ff}.log-event.warning .log-badge{color:#e8bb68}.log-event.error .log-badge{color:#ef8a80}.log-event.debug .log-badge{color:#a793db}.log-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px}.log-detail{color:var(--muted);font-size:12px;white-space:pre-wrap;margin-top:4px}.log-empty{padding:20px 0;text-align:center;color:var(--muted)}
+.log-export-wrap{position:relative}.log-export-menu{position:absolute;right:0;top:calc(100% + 4px);z-index:25;width:max-content;max-width:calc(100vw - 48px);padding:4px;border:1px solid rgba(150,170,210,.13);border-radius:2px;background:rgba(30,39,56,.97);box-shadow:0 8px 24px #0007}.log-actions .log-export-menu button{display:block;text-align:left;width:100%;height:32px;border:0;border-radius:1px;background:transparent}.log-actions .log-export-menu button:hover,.log-actions .log-export-menu button:focus{background:#6699ff24}
+</style></head><body class="home-page">
+<svg class="menu-symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8M6 9v12h5v-7h3v7h4V9"/></symbol><symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="7" rx="1"/><rect x="2" y="14" width="20" height="7" rx="1"/><circle cx="6" cy="6.5" r=".8"/><circle cx="6" cy="17.5" r=".8"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="m9 2-.7 3-2 .9-2.8-.9-2 3.5 2.2 2.1v2.7L1.5 15.5l2 3.5 2.8-.9 2 .9.7 3h4l.7-3 2-.9 2.8.9 2-3.5-2.2-2.1v-2.7l2.2-2.2-2-3.5-2.8.9-2-.9L13 2Z" transform="translate(1 0)"/><circle cx="12" cy="12" r="4"/></symbol><symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v11M6 5a10 10 0 1 0 12 0"/></symbol><symbol id="i-language" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><path d="M2 12h20M4 6h16M4 18h16"/></symbol><symbol id="i-log" viewBox="0 0 24 24"><path d="M3 5h18M3 12h18M3 19h18"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 10v8M12 6v1"/></symbol></svg>
+<header class="topbar"><div class="brand">TIZY</div>
+<nav aria-label="Основная навигация"><button class="active" data-tab="home"><svg class="menu-icon" aria-hidden="true"><use href="#i-home"/></svg><span data-i18n>Главная</span></button><button data-tab="servers"><svg class="menu-icon" aria-hidden="true"><use href="#i-server"/></svg><span data-i18n>Серверы</span></button><button data-tab="settings"><svg class="menu-icon" aria-hidden="true"><use href="#i-settings"/></svg><span data-i18n>Настройки</span></button><span id="header-status" class="status-pill" role="status" aria-live="polite"><i aria-hidden="true"></i><span id="header-state">Отключено</span></span><button id="header-add" aria-controls="add" aria-expanded="false"><span aria-hidden="true">+</span><span data-i18n>Добавить</span></button></nav></header>
+<div id="message" role="status" aria-live="polite"></div>
+<section id="home"><div class="panel hero"><div class="power-block"><button id="power" class="power" aria-label="Подключить VPN" aria-pressed="false" aria-busy="false"><span class="power-ring power-ring-outer" aria-hidden="true"></span><svg class="power-symbol" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4v19M11.3 10.1a18 18 0 1 0 25.4 0"/></svg><svg class="power-spinner" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46"/></svg></button><div class="muted" id="phase">Проверка готовности…</div><div class="home-actions"><button id="home-refresh" title="Проверяет готовность VPN"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v6h-6M20 11a8 8 0 1 0-1 6"/></svg><span data-i18n>Обновить</span></button><button id="home-ping"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19a10 10 0 1 1 18 0ZM12 15l7-8"/></svg><span data-i18n>Пинг</span></button></div></div><div class="server-block"><div class="home-server-tile"><button id="home-servers" type="button" class="home-card-heading muted" aria-controls="servers"><span data-i18n>Выберите сервер</span><svg class="home-card-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button><h1 id="selected">Добавьте сервер</h1><div class="home-peer-line"><div class="muted" id="protocol"><span id="home-protocol"></span><span class="protocol-separator"> · </span><span id="home-network"></span><span class="protocol-separator"> · </span><span id="home-security"></span></div><span id="home-latency" class="home-latency"></span><span id="home-ip-family" class="home-ip-family"></span><span id="home-ip" class="home-ip"></span></div></div><div class="metrics"><div class="metric metric-upload"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4m-6 6 6-6 6 6"/></svg><strong id="upload">—</strong><span class="muted" data-i18n>Отправка</span></div><div class="metric metric-uptime"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg><strong id="uptime">—</strong><span class="muted" data-i18n>Время</span></div><div class="metric metric-download"><svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg><strong id="download">—</strong><span class="muted" data-i18n>Загрузка</span></div></div></div></div></section>
+<section id="servers" class="hidden"><div class="servers-heading"><div><h2 data-i18n>Серверы</h2><p id="server-count" class="note"></p></div><button id="ping"><svg class="ping-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19a10 10 0 1 1 18 0ZM12 15l7-8"/><circle cx="12" cy="15" r="1"/></svg><span id="ping-label">Ping</span></button></div><div id="server-list"></div></section>
+<section id="add" class="hidden"><div class="add-grid"><div class="panel pair-column"><h2 data-i18n>Отправить на ТВ</h2><p class="note" data-i18n>Отсканируйте QR-код телефоном</p><div class="pair-protocol" role="radiogroup" aria-label="Приложение на телефоне"><button data-pair="incy" class="active" role="radio" aria-checked="true">Incy</button><button data-pair="happ" role="radio" aria-checked="false">Happ</button><button data-pair="v2raytun" role="radio" aria-checked="false">v2RayTun</button></div><div id="pair-qr" class="qr-box" aria-label="QR-код для передачи"></div><div id="pair-code" class="pair-code"></div><p id="pair-expiry" class="note"></p><p id="pair-state" class="note" role="status"></p><button id="pair-start" data-i18n>Создать QR-код</button></div><div class="panel import-column"><h2 data-i18n>Ввести ссылку</h2><p class="note" data-i18n>Вставьте подписку или ссылку подключения</p><textarea id="links" aria-label="Ссылка подключения" placeholder="https://… или vless://…" spellcheck="false"></textarea><button id="import" data-i18n>Добавить</button><ol class="pair-steps"><li id="pair-step-1"></li><li id="pair-step-2"></li><li data-i18n>Отсканируйте QR-код</li><li id="pair-step-4"></li></ol></div></div></section>
+<section id="settings" class="hidden"><div class="settings-layout"><nav class="settings-rail" aria-label="Разделы настроек" role="tablist"><button class="active" data-setting="connection" role="tab" aria-selected="true"><svg class="menu-icon" aria-hidden="true"><use href="#i-power"/></svg><span data-i18n>Подключение</span></button><button data-setting="app-proxy" role="tab" aria-selected="false"><svg class="menu-icon" aria-hidden="true"><use href="#i-server"/></svg><span data-i18n>Прокси по приложениям</span></button><button data-setting="language" role="tab" aria-selected="false"><svg class="menu-icon" aria-hidden="true"><use href="#i-language"/></svg><span data-i18n>Язык</span></button><button data-setting="logs" role="tab" aria-selected="false"><svg class="menu-icon" aria-hidden="true"><use href="#i-log"/></svg><span data-i18n>Журнал</span></button><button data-setting="about" role="tab" aria-selected="false"><svg class="menu-icon" aria-hidden="true"><use href="#i-info"/></svg><span data-i18n>О приложении</span></button></nav><div>
+<section id="connection" class="panel settings-pane" role="tabpanel"><h2 data-i18n>Подключение</h2><label class="field"><span data-i18n>Тип IP протокола</span><select id="family"><option value="auto" data-i18n>Автоматически</option><option value="ipv4">IPv4</option><option value="ipv6">IPv6</option></select></label><label class="switch"><input id="auto" type="checkbox" role="switch"><span data-i18n>Автоподключение VPN</span></label><p class="note" data-i18n>Параметры сохраняются автоматически.</p><p class="note" data-i18n>Выбрать тип IP протокола можно только без активного подключения к VPN-серверу.</p><p class="note" data-i18n>При обрыве, VPN будет переподключаться автоматически.</p></section>
+<section id="app-proxy" class="panel settings-pane hidden" role="tabpanel"><h2 data-i18n>Прокси по приложениям</h2><label class="switch"><input id="selective" type="checkbox" role="switch"><span data-i18n>Включить прокси по приложениям</span></label><div class="routing-heading"><label id="routing-label" for="app-mode" data-i18n>Выберите режим маршрутизации</label><span id="app-count" class="note" aria-live="polite"></span></div><div class="routing-controls"><select id="app-mode" aria-labelledby="routing-label"><option value="direct" data-i18n>Напрямую</option><option value="vpn" data-i18n>Через VPN</option></select><button id="load-apps" data-i18n>Обновить список</button></div><div class="routing-summary"><button id="save-apps" title="Сохраняет список выбранных приложений" data-i18n>Сохранить</button><div class="routing-summary-text"><p id="routing-description" class="note"></p><p id="routing-note" class="note" data-i18n>Если ни одно приложение не выбрано, весь трафик идёт через VPN.</p></div></div><div id="apps" role="group" aria-label="Приложения ТВ"></div></section>
+<section id="language" class="panel settings-pane hidden" role="tabpanel"><h2 data-i18n>Язык</h2><label class="field"><span data-i18n>Язык интерфейса</span><select id="language-choice"><option value="auto" data-i18n>Автоматически</option><option value="en">English</option><option value="zh-Hans">简体中文</option><option value="ru">Русский</option><option value="tr">Türkçe</option></select></label><p class="note" data-i18n>Автоматически: использовать язык браузера или телевизора.</p></section>
+<section id="logs" class="panel settings-pane hidden" role="tabpanel"><h2 data-i18n>Журнал</h2>
+<label class="switch"><input id="log-enabled" type="checkbox" role="switch"><span><b data-i18n>Ведение журнала</b><small data-i18n>Записывать новые события в журнал</small></span></label>
+<div class="log-filter"><b data-i18n>Уровень событий</b><div class="log-options" role="radiogroup" aria-label="Уровень событий"><button data-log-level="all" role="radio" data-i18n>Все</button><button data-log-level="warning" role="radio" data-i18n>Предупреждения и ошибки</button><button data-log-level="error" role="radio" data-i18n>Только ошибки</button></div></div>
+<div class="log-filter"><b data-i18n>Типы событий</b><div class="log-options"><button data-log-category="connection" role="checkbox" data-i18n>Подключение</button><button data-log-category="network" role="checkbox" data-i18n>Сеть</button><button data-log-category="servers" role="checkbox" data-i18n>Серверы</button><button data-log-category="system" role="checkbox" data-i18n>Система</button></div></div>
+<label class="switch"><input id="log-details" type="checkbox" role="switch"><span><b data-i18n>Подробные события</b><small data-i18n>Проверки соединения, пинг, готовность службы и повторные попытки.</small></span></label>
+<div class="log-toolbar"><p id="log-count" class="note" role="status"></p><div class="log-actions"><div class="log-export-wrap"><button id="log-export" aria-haspopup="menu" aria-expanded="false"><span data-i18n>Экспорт журнала</span><span aria-hidden="true"> ▾</span></button><div id="log-export-menu" class="log-export-menu hidden" role="menu"><button type="button" role="menuitem" data-export-scope="filtered" data-i18n>По выбранным фильтрам</button><button type="button" role="menuitem" data-export-scope="all" data-i18n>Весь журнал</button></div></div><button id="log-clear" data-i18n>Очистить журнал</button></div></div><div id="events" class="events" aria-label="Журнал"></div></section>
+<section id="about" class="panel settings-pane hidden" role="tabpanel"><h2 data-i18n>О приложении</h2><p>TIZY Shard · <span id="version">0.4.2</span></p><div class="migration-row"><button id="migrate" aria-describedby="migration-help" data-i18n>Перенести из приложения TIZY</button><p id="migration-help" class="note"><span data-i18n>Переносит серверы и настройки из отдельного приложения TIZY.</span><br><span data-i18n>Доступно при пустом списке серверов плагина.</span></p></div><p id="core" class="note"></p><button id="prepare" data-i18n>Проверить готовность</button><p class="note" data-i18n>Плагин работает внутри Vetro. Отдельное приложение TIZY не требуется.</p><p class="note" data-i18n>Для работы VPN служба Vetro должна оставаться запущенной.</p></section>
+</div></div></section>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+<script data-library="qrcode">//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(row * cellSize, col * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+</script>
+<script src="i18n-locales.js"></script><script src="i18n.js"></script><script src="logging.js"></script>
+<script>
+(function(){'use strict';var state=null,working=false,appItems=[],lastRows='',labels={disconnected:'Отключено',connecting:'Подключаемся…',connected:'Подключено',disconnecting:'Отключаемся…',error:'Отключено'},language='ru',preference=null,page='home',returnPage='home',pairProtocol='incy',pairSerial=0,lastQR='',importSuccess=false,toastTimer=null,toastSource='Изменения сохранены.',draftProxy=null,appDirty=false,openServerId=null,renameDialog=null,stateRevision=0,pollSerial=0;
+
+var extra={"Записывать новые события в журнал":["Record new events in the log","Yeni olayları günlüğe kaydet","将新事件记录到日志"],"Скопируйте ссылку и откройте её в адресной строке браузера. Файл TXT скачается на компьютер. Ссылка действует, пока работает плагин и не истекла сессия.":["Copy the link and open it in the browser address bar. The TXT file will download to your computer. The link expires with the plugin session.", "Bağlantıyı kopyalayıp tarayıcının adres çubuğunda açın. TXT dosyası bilgisayarınıza indirilir. Bağlantı eklenti oturumuyla birlikte sona erer.", "复制链接并在浏览器地址栏打开，TXT 文件将下载到电脑。链接将在插件会话结束时失效。"],"Скопировать ссылку":["Copy link", "Bağlantıyı kopyala", "复制链接"],"Ссылка скопирована":["Link copied", "Bağlantı kopyalandı", "链接已复制"],"Нажмите Ctrl+C или ⌘C, чтобы скопировать ссылку":["Press Ctrl+C or ⌘C to copy the link", "Bağlantıyı kopyalamak için Ctrl+C veya ⌘C tuşlarına basın", "按 Ctrl+C 或 ⌘C 复制链接"],"Закрыть":["Close", "Kapat", "关闭"],"Включите ведение журнала, чтобы записывать новые события.":["Enable event logging to record new events.","Yeni olayları kaydetmek için olay günlüğünü açın.","启用日志以记录新事件。"],"Журнал пуст":["Log is empty","Günlük boş","日志为空"],"Проверяет готовность VPN": ["Checks VPN readiness", "VPN’in hazır olduğunu denetler", "检查 VPN 是否就绪"],"Сохраняет список выбранных приложений": ["Saves the list of selected applications", "Seçilen uygulamaların listesini kaydeder", "保存所选应用列表"],"Выберите режим маршрутизации": ["Choose routing mode", "Yönlendirme modunu seçin", "选择路由模式"],"Параметры сохраняются автоматически.": ["Settings are saved automatically.", "Ayarlar otomatik olarak kaydedilir.", "设置会自动保存。"],"Изменение автоподключения сохраняется сразу.": ["Auto-connect changes are saved immediately.", "Otomatik bağlantı değişiklikleri hemen kaydedilir.", "自动连接的更改会立即保存。"], "Автоподключение включено": ["Auto-connect enabled", "Otomatik bağlantı etkin", "已启用自动连接"], "Автоподключение выключено": ["Auto-connect disabled", "Otomatik bağlantı devre dışı", "已关闭自动连接"],"Переносит серверы и настройки из отдельного приложения TIZY.": ["Imports servers and settings from the standalone TIZY app.", "Bağımsız TIZY uygulamasından sunucuları ve ayarları aktarır.", "从独立 TIZY 应用导入服务器和设置。"], "Доступно при пустом списке серверов плагина.": ["Available when the plugin server list is empty.", "Eklentinin sunucu listesi boşken kullanılabilir.", "仅在插件服务器列表为空时可用。"], "Серверы и настройки перенесены.": ["Servers and settings have been imported.", "Sunucular ve ayarlar aktarıldı.", "服务器和设置已导入。"],"Для переноса список серверов плагина должен быть пуст": ["The plugin server list must be empty before importing", "Aktarmadan önce eklentinin sunucu listesi boş olmalıdır", "导入前插件服务器列表必须为空"], "Данные отдельного приложения TIZY не найдены на ТВ": ["Standalone TIZY app data was not found on the TV", "TV’de bağımsız TIZY uygulamasının verileri bulunamadı", "电视上未找到独立 TIZY 应用的数据"],"Некорректный цвет или прозрачность":["Invalid color or transparency","Geçersiz renk veya saydamlık","颜色或透明度无效"],"Ядро Xray готово":["Xray core is ready","Xray çekirdeği hazır","Xray 内核已就绪"],"Для удаления сервера отключите VPN":["Disconnect the VPN to delete the server","Sunucuyu silmek için VPN bağlantısını kesin","请先断开 VPN 再删除服务器"],"Нельзя удалить активный сервер":["Cannot delete the active server","Etkin sunucu silinemez","无法删除当前活动服务器"],"Переименовать":["Rename","Yeniden adlandır","重命名"],"Название сервера":["Server name","Sunucu adı","服务器名称"],"Отмена":["Cancel","İptal","取消"],"Введите название от 1 до 100 символов":["Enter a name from 1 to 100 characters","1 ile 100 karakter arasında bir ad girin","请输入 1 到 100 个字符的名称"],"Удалить":["Delete", "Sil", "删除"],"Изменения сохранены.":["Changes saved.", "Değişiklikler kaydedildi.", "更改已保存。"],"Недоступен":["Unavailable", "Ulaşılamıyor", "不可用"],"Меню сервера":["Server menu", "Sunucu menüsü", "服务器菜单"],"VPN работает везде, кроме этих приложений.":["VPN works everywhere except these applications.", "VPN bu uygulamalar dışında her yerde çalışır.", "VPN 在除这些应用之外的所有应用中工作。"],"VPN работает выборочно, только в этих приложениях.":["VPN works selectively, only in these applications.", "VPN yalnızca bu uygulamalarda çalışır.", "VPN 仅在所选应用中工作。"],"Сохранить":["Save","Kaydet","保存"],"Выбрать":["Select","Seç","选择"],"Перенести из приложения TIZY":["Import from the TIZY app","TIZY uygulamasından aktar","从 TIZY 应用导入"],"Автоматически: использовать язык браузера или телевизора.":["Automatic: use the browser or TV language.","Otomatik: tarayıcı veya TV dilini kullan.","自动：使用浏览器或电视语言。"],"Плагин работает внутри Vetro. Отдельное приложение TIZY не требуется.":["The plugin runs inside Vetro. A separate TIZY app is not required.","Eklenti Vetro içinde çalışır. Ayrı bir TIZY uygulaması gerekmez.","插件在 Vetro 内运行，无需单独的 TIZY 应用。"],"Для работы VPN служба Vetro должна оставаться запущенной.":["The Vetro service must stay running for the VPN to work.","VPN için Vetro hizmeti çalışmaya devam etmelidir.","使用 VPN 时，Vetro 服务必须保持运行。"],"мин":["min","dk","分钟"],"Нет связи с плагином: ":["Cannot reach the plugin: ","Eklentiye ulaşılamıyor: ","无法连接插件："],"Сначала отключите VPN для изменения настроек":["Disconnect the VPN before changing these settings","Bu ayarları değiştirmeden önce VPN bağlantısını kesin","更改这些设置前请先断开 VPN"],"Некорректный язык":["Invalid language","Geçersiz dil","无效语言"],"Неизвестная операция":["Unknown action","Bilinmeyen işlem","未知操作"]};Object.keys(extra).forEach(function(source){var values=extra[source],english=values[0];TizyI18n.dictionary[source]=english;TizyI18n.translations.tr[english]=values[1];TizyI18n.translations['zh-Hans'][english]=values[2];});
+function tr(value){return TizyI18n.t(value,language);}
+function applyLanguage(next){next=next||'auto';var resolved=next==='auto'?TizyI18n.language(navigator.language):next;if(preference===next&&language===resolved)return;preference=next;language=resolved;document.documentElement.lang=language;el('save-apps').title=tr('Сохраняет список выбранных приложений');el('home-refresh').title=tr('Проверяет готовность VPN');if(el('toast').textContent)text('toast',tr(toastSource));lastRows='';Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'),function(node){if(node._source===undefined)node._source=node.textContent;node.textContent=tr(node._source);});Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-placeholder]'),function(node){if(node._placeholder===undefined)node._placeholder=node.placeholder;node.placeholder=tr(node._placeholder);});}
+function el(id){return document.getElementById(id);}function text(id,value){el(id).textContent=value;if(id==='selected'||id==='message')el(id).title=value;}function request(route,body){var mutation=body!==undefined;if(mutation)stateRevision++;return fetch(route,{method:body===undefined?'GET':'POST',headers:body===undefined?{}:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)}).then(function(r){return r.json().then(function(data){if(mutation)stateRevision++;if(!r.ok)throw Error(tr(data.error)||'HTTP '+r.status);return data;});});}
+function run(route,body){if(working)return Promise.resolve();working=true;text('message','');return request(route,body||{}).then(function(s){if(s.name)render(s);return s;}).catch(function(e){text('message',tr(e.message));throw e;}).then(function(s){working=false;return s;},function(){working=false;});}
+function tileAppearance(value){value=value||{};return {borderColor:/^#[0-9a-fA-F]{6}$/.test(value.borderColor)?value.borderColor:'#8faad2',color:/^#[0-9a-fA-F]{6}$/.test(value.color)?value.color:'#222733',opacity:typeof value.opacity==='number'&&value.opacity>=0&&value.opacity<=1?value.opacity:0.4};}
+function previewTiles(value){var appearance=tileAppearance(value),color=appearance.color;document.documentElement.style.setProperty('--tile-bg','rgba('+parseInt(color.slice(1,3),16)+','+parseInt(color.slice(3,5),16)+','+parseInt(color.slice(5,7),16)+','+appearance.opacity+')');var border=appearance.borderColor,rgb=parseInt(border.slice(1,3),16)+','+parseInt(border.slice(3,5),16)+','+parseInt(border.slice(5,7),16);document.documentElement.style.setProperty('--tile-border','rgba('+rgb+',0.16)');document.documentElement.style.setProperty('--tile-divider','rgba('+rgb+',0.12)');}
+
+function speed(n){if(typeof n!=='number')return '—';return n>=1048576?tr((n/1048576).toFixed(1)+' МБ/с'):tr((n/1024).toFixed(1)+' КБ/с');}
+function showToast(message){clearTimeout(toastTimer);toastSource=message||'Изменения сохранены.';text('toast',tr(toastSource));el('toast').className='toast';toastTimer=setTimeout(function(){el('toast').className='toast hidden';},3000);}
+function elapsed(start){if(!start)return '00:00';var seconds=Math.max(0,Math.floor((Date.now()-start)/1000)),hours=Math.floor(seconds/3600),minutes=Math.floor(seconds/60)%60;function pad(n){return n<10?'0'+n:String(n);}return (hours?pad(hours)+':':'')+pad(minutes)+':'+pad(seconds%60);}
+function powerPhase(phase){var active=phase==='connected',busy=phase==='connecting'||phase==='disconnecting',classes='power'+(active?' connected':busy?' connecting':'');if(el('power').className!==classes)el('power').className=classes;el('power').setAttribute('aria-busy',busy?'true':'false');el('power').setAttribute('aria-pressed',active?'true':'false');}
+function updateClock(){text('uptime',elapsed(state&&state.connectedAt));}
+function closeServerMenu(){openServerId=null;Array.prototype.forEach.call(document.querySelectorAll('.server-menu'),function(n){n.classList.add('hidden');});Array.prototype.forEach.call(document.querySelectorAll('.server-more'),function(n){n.setAttribute('aria-expanded','false');});}
+function closeRename(){if(!renameDialog)return;var id=renameDialog.serverId;renameDialog.parentNode.removeChild(renameDialog);renameDialog=null;var row=document.querySelector('[data-server-id="'+id+'"]');if(row)row.querySelector('.server-more').focus();}
+function openRename(p){closeServerMenu();if(renameDialog)closeRename();var overlay=document.createElement('div');overlay.className='rename-overlay';overlay.serverId=p.id;overlay.innerHTML='<div class="panel rename-dialog" role="dialog" aria-modal="true" aria-labelledby="rename-title"><h2 id="rename-title"></h2><label for="rename-name"></label><input id="rename-name" type="text" maxlength="100" required autocomplete="off"><p class="rename-error" role="alert"></p><button type="button" data-rename-save></button><button type="button" data-rename-cancel></button></div>';document.body.appendChild(overlay);renameDialog=overlay;var form=overlay.querySelector('.rename-dialog'),input=overlay.querySelector('input'),save=overlay.querySelector('[data-rename-save]'),cancel=overlay.querySelector('[data-rename-cancel]'),error=overlay.querySelector('.rename-error');overlay.querySelector('h2').textContent=tr('Переименовать');overlay.querySelector('label').textContent=tr('Название сервера');save.textContent=tr('Сохранить');cancel.textContent=tr('Отмена');input.value=p.name;input.focus();input.select();cancel.onclick=function(){if(!working)closeRename();};save.onclick=function(e){e.preventDefault();if(working)return;var value=input.value.trim();if(!value||value.length>100||/[\x00-\x1f\x7f]/.test(value)){error.textContent=tr('Введите название от 1 до 100 символов');return;}working=true;save.disabled=true;cancel.disabled=true;error.textContent='';request('rename',{id:p.id,name:value}).then(function(s){render(s);closeRename();showToast();},function(e){error.textContent=tr(e.message);}).then(function(){working=false;save.disabled=false;cancel.disabled=false;});};input.onkeydown=function(e){if(e.key==='Enter'||e.keyCode===13){e.preventDefault();save.click();}};}
+function rowServer(p){var row=document.createElement('div');row.className='row'+(state.selected===p.id?' selected':'');row.setAttribute('data-server-id',p.id);var info=document.createElement('div'),title=document.createElement('strong'),small=document.createElement('small');title.textContent=p.name;small.textContent=p.protocol.toUpperCase()+' · '+p.network.toUpperCase()+' · '+p.security;info.appendChild(title);info.appendChild(small);row.appendChild(info);
+var actions=document.createElement('div');actions.className='server-actions';var latency=document.createElement('span');latency.className='server-latency';actions.appendChild(latency);var choose=document.createElement('button');choose.className='server-choose';choose.textContent=tr('Выбрать');choose.disabled=state.phase==='connected'||state.busy;choose.onclick=function(){run('select',{id:p.id});};actions.appendChild(choose);
+var more=document.createElement('button'),menu=document.createElement('div'),rename=document.createElement('button'),remove=document.createElement('button');more.className='server-more';more.textContent='⋮';more.setAttribute('aria-label',tr('Меню сервера'));more.setAttribute('aria-haspopup','menu');more.setAttribute('aria-expanded','false');menu.className='server-menu hidden';menu.setAttribute('role','menu');rename.textContent=tr('Переименовать');rename.setAttribute('role','menuitem');rename.setAttribute('data-action','rename');rename.disabled=state.busy;rename.onclick=function(){openRename(p);};menu.appendChild(rename);remove.setAttribute('data-action','delete');remove.textContent=tr('Удалить');remove.setAttribute('role','menuitem');remove.disabled=state.busy;remove.onclick=function(){closeServerMenu();if(state.servers.length===1&&state.phase!=='disconnected'){showToast('Для удаления сервера отключите VPN');return;}if(state.selected===p.id&&state.servers.length>1){showToast('Нельзя удалить активный сервер');return;}run('delete',{id:p.id});};menu.appendChild(remove);more.onclick=function(e){e.stopPropagation();var wasOpen=openServerId===p.id;closeServerMenu();if(!wasOpen){openServerId=p.id;menu.classList.remove('hidden');more.setAttribute('aria-expanded','true');}};actions.appendChild(more);actions.appendChild(menu);row.appendChild(actions);return row;}
+function renderPings(){var values=state.serverPings||{},sweep=state.pingSweep||{};Array.prototype.forEach.call(document.querySelectorAll('[data-server-id]'),function(row){var result=values[row.getAttribute('data-server-id')],label=row.querySelector('.server-latency');label.textContent=result?(typeof result.latencyMs==='number'?tr(Math.round(result.latencyMs)+' мс'):tr('Недоступен')):sweep.running?'…':'';label.title=result?'TCP':'';});el('ping').disabled=!!(sweep.running||state.busy||!state.servers.length||state.phase==='connecting'||state.phase==='disconnecting');el('home-ping').disabled=el('ping').disabled;el('home-refresh').disabled=!!(state.busy||state.phase==='connecting'||state.phase==='disconnecting');var selectedPing=values[state.selected];var selected=state.servers.filter(function(p){return p.id===state.selected;})[0],peer=state.selectedPeer&&state.selectedPeer.profileId===state.selected?state.selectedPeer:null,ip=selectedPing&&selectedPing.serverIP||peer&&peer.serverIP||selected&&selected.serverIP||'',family=selectedPing&&selectedPing.family||peer&&peer.family||selected&&selected.family||0;var showPeer=!!selected&&(state.phase==='connected'||!!selectedPing||!!sweep.running);text('home-latency',showPeer?(selectedPing?(typeof selectedPing.latencyMs==='number'?tr(Math.round(selectedPing.latencyMs)+' мс'):tr('Недоступен')):'…'):'');el('home-latency').title=showPeer&&selectedPing?'TCP':'';text('home-ip-family',showPeer&&ip&&(family===4||family===6)?'IPv'+family:'');text('home-ip',showPeer?(ip||tr('IP определяется…')):'');text('ping-label',sweep.running?'Ping…':'Ping');}
+function render(s){state=s;previewTiles(s.settings.tileAppearance);applyLanguage(s.settings.language);el('language-choice').value=s.settings.language||'auto';text('version',s.version);text('phase',tr(labels[s.phase]||s.phase));var headerLabel=tr(labels[s.phase]||s.phase);if(el('header-state').textContent!==headerLabel)text('header-state',headerLabel);el('header-status').className='status-pill'+(s.phase==='connected'?' connected':s.phase==='connecting'||s.phase==='disconnecting'?' connecting':'');powerPhase(s.phase);el('power').disabled=s.busy||s.phase==='connecting'||s.phase==='disconnecting';el('power').setAttribute('aria-label',tr(s.phase==='connected'?'Отключить VPN':'Подключить VPN'));var p=s.servers.filter(function(p){return p.id===s.selected;})[0];text('selected',p?p.name:tr('Добавьте сервер'));text('home-protocol',p?String(p.protocol||'').toUpperCase():'');text('home-network',p?String(p.network||'').toUpperCase():'');text('home-security',p?String(p.security||'').toUpperCase():'');el('protocol').classList.toggle('hidden',!p);text('upload',speed(s.traffic.uploadBps));text('download',speed(s.traffic.downloadBps));updateClock();text('server-count',tr(s.servers.length+' · в списке'));text('core',s.coreVersion||tr('Ядро пока недоступно'));if(!working)text('message',tr(s.error||''));
+if(!el('settings').contains(document.activeElement)){el('family').value=s.settings.ipFamily||'auto';el('auto').checked=!!s.settings.autoConnect;}el('auto').disabled=!!(s.busy||s.phase==='connecting'||s.phase==='disconnecting');el('family').disabled=!!(s.busy||s.phase==='connected'||s.phase==='connecting'||s.phase==='disconnecting');if(!appDirty||!draftProxy)draftProxy=JSON.parse(JSON.stringify(s.settings.appProxy));draftProxy.enabled=s.settings.appProxy.enabled;draftProxy.mode=s.settings.appProxy.mode;el('selective').checked=draftProxy.enabled;el('app-mode').value=draftProxy.mode;syncAppChecks();
+syncRoutingControls();el('migrate').disabled=s.servers.length>0||s.busy||s.phase==='connected'||s.phase==='connecting'||s.phase==='disconnecting';var key=JSON.stringify([s.servers,s.selected,s.phase,s.busy]);if(key!==lastRows){lastRows=key;var list=el('server-list');list.textContent='';s.servers.forEach(function(p){list.appendChild(rowServer(p));});}renderPings();renderPair(s);renderLogs();}
+
+var logRowsKey='';
+function logPreferences(){try{return TizyLogging.preferences(state.settings.log);}catch(ignore){return TizyLogging.defaults();}}
+function renderLogs(){var prefs=logPreferences(),events=state.events||[],shown=events.filter(function(e){return TizyLogging.visible(e,prefs);});el('log-enabled').checked=prefs.enabled;el('log-details').checked=prefs.details;Array.prototype.forEach.call(document.querySelectorAll('[data-log-level]'),function(button){button.setAttribute('aria-checked',String(prefs.level===button.getAttribute('data-log-level')));button.disabled=!!state.busy;});Array.prototype.forEach.call(document.querySelectorAll('[data-log-category]'),function(button){button.setAttribute('aria-checked',String(prefs.categories.indexOf(button.getAttribute('data-log-category'))>=0));button.disabled=!!state.busy;});el('log-enabled').disabled=el('log-details').disabled=el('log-clear').disabled=!!state.busy;el('log-export').disabled=!events.length;text('log-count',tr('Показано событий: ')+shown.length+' / '+events.length);var key=JSON.stringify([language,prefs,events]);if(key===logRowsKey)return;logRowsKey=key;var holder=el('events');holder.textContent='';if(!shown.length){var empty=document.createElement('p');empty.className='log-empty';empty.textContent=tr(!prefs.enabled?'Включите ведение журнала, чтобы записывать новые события.':events.length?'Нет событий по выбранным фильтрам':'Журнал пуст');holder.appendChild(empty);return;}var levelNames={info:'Информация',debug:'Подробно',warning:'Предупреждение',error:'Ошибка'},categoryNames={connection:'Подключение',network:'Сеть',servers:'Серверы',system:'Система'};shown.slice().reverse().forEach(function(event){var row=document.createElement('div'),meta=document.createElement('div'),time=document.createElement('time'),badge=document.createElement('span'),category=document.createElement('span'),message=document.createElement('div');row.className='log-event '+(levelNames[event.level]?event.level:'info');meta.className='log-meta';time.dateTime=new Date(event.time).toISOString();time.textContent=new Date(event.time).toLocaleString(TizyI18n.locales[language]);badge.className='log-badge';badge.textContent=tr(levelNames[event.level]||'Информация');category.textContent=tr(categoryNames[event.category]||'Система');meta.appendChild(time);meta.appendChild(badge);meta.appendChild(category);row.appendChild(meta);message.className='log-text';message.textContent=tr(TizyLogging.scrub(TizyLogging.message(event.text)));row.appendChild(message);if(prefs.details&&event.detail){var detail=document.createElement('div');detail.className='log-detail';detail.textContent=tr(TizyLogging.scrub(event.detail));row.appendChild(detail);}holder.appendChild(row);});}
+function saveLog(change){if(!state)return;if(working){renderLogs();return;}var prefs=logPreferences();change(prefs);run('settings',{log:prefs}).then(function(s){renderLogs();if(s)showToast();});}
+el('log-enabled').onchange=function(){var value=this.checked;saveLog(function(p){p.enabled=value;});};el('log-details').onchange=function(){var value=this.checked;saveLog(function(p){p.details=value;});};Array.prototype.forEach.call(document.querySelectorAll('[data-log-level]'),function(button){button.onclick=function(){var level=this.getAttribute('data-log-level');saveLog(function(p){p.level=level;});};});Array.prototype.forEach.call(document.querySelectorAll('[data-log-category]'),function(button){button.onclick=function(){var category=this.getAttribute('data-log-category');saveLog(function(p){var i=p.categories.indexOf(category);if(i<0)p.categories.push(category);else p.categories.splice(i,1);});};});
+el('log-clear').onclick=function(){run('logs/clear').then(function(s){if(s)showToast('Журнал очищен');});};
+function openLogExport(scope){closeLogExportMenu();if(!state||(state.events||[]).length===0)return;var overlay=document.createElement('div');overlay.className='rename-overlay';overlay.innerHTML='<div class="panel rename-dialog" role="dialog" aria-modal="true" aria-labelledby="export-title"><h2 id="export-title"></h2><p class="note"></p><input type="text" readonly aria-label="URL"><button type="button" data-export-copy></button><button type="button" data-export-close></button></div>';var link=document.createElement('a');link.href='logs/export/'+(scope==='all'?'all':'filtered')+'/'+language;overlay.querySelector('h2').textContent=tr('Экспорт журнала');overlay.querySelector('p').textContent=tr('Скопируйте ссылку и откройте её в адресной строке браузера. Файл TXT скачается на компьютер. Ссылка действует, пока работает плагин и не истекла сессия.');var input=overlay.querySelector('input'),copy=overlay.querySelector('[data-export-copy]'),close=overlay.querySelector('[data-export-close]');input.value=link.href;copy.textContent=tr('Скопировать ссылку');close.textContent=tr('Закрыть');document.body.appendChild(overlay);input.focus();input.select();input.onclick=function(){input.select();};copy.onclick=function(){input.focus();input.select();var copied=false;try{copied=document.execCommand('copy');}catch(ignore){}if(copied)showToast('Ссылка скопирована');else showToast('Нажмите Ctrl+C или ⌘C, чтобы скопировать ссылку');};close.onclick=function(){document.body.removeChild(overlay);el('log-export').focus();};overlay.onkeydown=function(e){if(e.key==='Escape'||e.keyCode===27)close.click();};};
+
+
+function closeLogExportMenu(){el('log-export-menu').classList.add('hidden');el('log-export').setAttribute('aria-expanded','false');}
+el('log-export').onclick=function(){var open=this.getAttribute('aria-expanded')!=='true';el('log-export-menu').classList.toggle('hidden',!open);this.setAttribute('aria-expanded',String(open));};
+Array.prototype.forEach.call(document.querySelectorAll('[data-export-scope]'),function(button){button.onclick=function(){openLogExport(this.getAttribute('data-export-scope'));};});
+document.addEventListener('click',function(e){if(!el('log-export-menu').parentNode.contains(e.target))closeLogExportMenu();});
+el('log-export-menu').addEventListener('keydown',function(e){var buttons=this.querySelectorAll('button'),i=Array.prototype.indexOf.call(buttons,document.activeElement);if(e.key==='Escape'||e.keyCode===27){e.preventDefault();closeLogExportMenu();el('log-export').focus();}else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(i+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length].focus();}});
+el('log-export').onkeydown=function(e){if(e.key==='ArrowDown'||e.keyCode===40){e.preventDefault();el('log-export-menu').classList.remove('hidden');this.setAttribute('aria-expanded','true');el('log-export-menu').querySelector('button').focus();}};
+
+el('home-servers').onclick=function(){showPage('servers');document.querySelector('[data-tab=servers]').focus();};el('power').onclick=function(){if(!state||working)return;var previous=state.phase,route=previous==='connected'?'disconnect':'connect';powerPhase(route==='connect'?'connecting':'disconnecting');this.disabled=true;run(route).then(function(s){if(!s){powerPhase(state?state.phase:previous);el('power').disabled=!!(state&&state.busy);}});};el('import').onclick=function(){if(working)return;importSuccess=false;renderPair({pairProtocol:pairProtocol,pairing:{phase:'importing'}});run('import',{text:el('links').value}).then(function(s){if(s){el('links').value='';importSuccess=true;pairSerial++;request('pair/cancel',{}).catch(function(){});renderPair(s);}else renderPair({pairProtocol:pairProtocol,pairing:{phase:'error',error:el('message').textContent}});});};el('migrate').onclick=function(){run('migrate').then(function(s){if(s)showToast('Серверы и настройки перенесены.');});};el('prepare').onclick=function(){run('prepare');};el('family').onchange=function(){var control=this,value=this.value;if(working){control.value=state.settings.ipFamily||'auto';return;}control.disabled=true;run('settings',{ipFamily:value}).then(function(s){control.value=(s?s.settings:state.settings).ipFamily||'auto';control.disabled=!!(state&&(state.phase==='connected'||state.phase==='connecting'||state.phase==='disconnecting'));if(s)showToast();});};el('auto').onchange=function(){var control=this,enabled=this.checked;if(working){control.checked=!!(state&&state.settings.autoConnect);return;}control.disabled=true;run('settings',{autoConnect:enabled}).then(function(s){control.checked=!!(s?s.settings.autoConnect:state&&state.settings.autoConnect);control.disabled=false;if(s)showToast(enabled?'Автоподключение включено':'Автоподключение выключено');});};el('ping').onclick=el('home-ping').onclick=function(){run('ping');};el('home-refresh').onclick=function(){run('refresh').then(function(s){if(s)showToast('Ядро Xray готово');});};
+function captureAppSelection(){if(draftProxy&&appItems.length)draftProxy[draftProxy.mode]=Array.prototype.filter.call(el('apps').querySelectorAll('input'),function(c){return c.checked;}).map(function(c){return c.value;});}
+el('load-apps').onclick=function(){captureAppSelection();run('applications').then(function(s){if(!s)return;appItems=s.applications;var holder=el('apps');holder.textContent='';appItems.forEach(function(app){var l=document.createElement('label'),c=document.createElement('input');l.className='app-option';c.type='checkbox';c.value=app.id;c.checked=draftProxy[draftProxy.mode].indexOf(app.id)>=0;c.onchange=function(){appDirty=true;captureAppSelection();syncRoutingControls();};l.appendChild(c);l.appendChild(document.createTextNode(language==='ru'?app.nameRu||app.name:app.name||app.nameRu));holder.appendChild(l);});syncRoutingControls();});};
+function syncAppChecks(){if(!draftProxy)return;Array.prototype.forEach.call(el('apps').querySelectorAll('input'),function(c){c.checked=draftProxy[draftProxy.mode].indexOf(c.value)>=0;});}
+function restoreProxyFlags(){if(!state||!draftProxy)return;draftProxy.enabled=state.settings.appProxy.enabled;draftProxy.mode=state.settings.appProxy.mode;el('selective').checked=draftProxy.enabled;el('app-mode').value=draftProxy.mode;syncAppChecks();syncRoutingControls();}
+function applyProxyFlag(patch){if(working||!state){restoreProxyFlags();return;}captureAppSelection();run('settings',{appProxy:patch}).then(function(s){restoreProxyFlags();if(s)showToast();});syncRoutingControls();}
+el('save-apps').onclick=function(){if(working)return;captureAppSelection();run('settings',{appProxy:{direct:draftProxy.direct.slice(),vpn:draftProxy.vpn.slice()}}).then(function(s){if(!s){syncRoutingControls();return;}appDirty=false;draftProxy=JSON.parse(JSON.stringify(s.settings.appProxy));restoreProxyFlags();showToast();});syncRoutingControls();};
+function syncRoutingControls(){text('app-count',tr('Выбрано приложений: ')+(draftProxy?draftProxy[el('app-mode').value].length:0));var blocked=working||!!(state&&(state.busy||state.phase==='connecting'||state.phase==='disconnecting'));el('selective').disabled=blocked;el('app-mode').disabled=blocked||!el('selective').checked;el('save-apps').disabled=blocked||!appDirty;el('load-apps').disabled=blocked;Array.prototype.forEach.call(el('apps').querySelectorAll('input'),function(c){c.disabled=blocked;});text('routing-description',tr(el('app-mode').value==='vpn'?'VPN работает выборочно, только в этих приложениях.':'VPN работает везде, кроме этих приложений.'));}
+el('selective').onchange=function(){applyProxyFlag({enabled:this.checked});};
+el('app-mode').onchange=function(){applyProxyFlag({mode:this.value});};
+function cancelQR(){pairSerial++;lastQR='';el('pair-qr').classList.remove('loading');el('pair-qr').setAttribute('aria-busy','false');el('pair-qr').textContent='';text('pair-code','');text('pair-expiry','');request('pair/cancel',{}).catch(function(){});}
+function showPage(name){closeServerMenu();if(page==='add'&&name!=='add'){cancelQR();el('links').value='';}page=name;document.body.className=name==='home'?'home-page':'';['home','servers','settings','add'].forEach(function(id){el(id).className=id===name?'':'hidden';});Array.prototype.forEach.call(document.querySelectorAll('[data-tab]'),function(n){n.className=n.getAttribute('data-tab')===name?'active':'';});el('header-add').setAttribute('aria-expanded',name==='add'?'true':'false');}
+function startQR(protocol){var serial=++pairSerial;pairProtocol=protocol;importSuccess=false;lastQR='';el('pair-qr').textContent='';renderPair({pairProtocol:protocol,pairing:{phase:'starting'}});request('pair/cancel',{}).then(function(){if(serial!==pairSerial||page!=='add')return;return request('pair/start',{protocol:protocol});}).then(function(s){if(s&&serial===pairSerial&&page==='add')render(s);}).catch(function(e){if(serial===pairSerial&&page==='add')renderPair({pairProtocol:protocol,pairing:{phase:'error',error:e.message}});});}
+function pairSuccess(){var box=el('pair-qr');if(box.querySelector('.pair-success'))return;box.innerHTML='<svg class="pair-success" viewBox="0 0 100 100" aria-hidden="true"><path d="M23 50 L42 69 L78 30" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>';}
+function renderPair(s){var p=importSuccess?{phase:'received'}:s.pairProtocol&&s.pairProtocol!==pairProtocol?{phase:'starting'}:s.pairing||{phase:'idle'},happ=pairProtocol==='happ',v2=pairProtocol==='v2raytun';
+var loading=page==='add'&&['starting','receiving','importing'].indexOf(p.phase)>=0;el('pair-qr').classList.toggle('loading',loading);el('pair-qr').setAttribute('aria-busy',loading?'true':'false');
+var labels={idle:'Создайте QR для передачи',starting:v2?'Подключаемся к v2RayTun…':happ?'Открываем приём Happ…':'Регистрируем код…',waiting:'Ожидание сканирования QR-кода…',receiving:'Получаем данные из Happ…',importing:'Получаем серверы…',received:'Сервер добавлен в раздел «Серверы»',expired:'Код истёк. Создайте новый.',error:'Ошибка передачи'};text('pair-state',tr(p.error||labels[p.phase]||''));text('pair-code',p.phase==='waiting'&&!happ&&!v2?String(p.code||'').replace(/^(.{4})(.{4})$/,'$1 $2'):'');
+var seconds=p.expires?Math.max(0,Math.ceil((p.expires-Date.now())/1000)):0;text('pair-expiry',seconds&&p.phase==='waiting'?tr('Истекает через '+Math.floor(seconds/60)+':'+('0'+seconds%60).slice(-2)):'');
+Array.prototype.forEach.call(document.querySelectorAll('[data-pair]'),function(b){var chosen=b.getAttribute('data-pair')===pairProtocol;b.className=chosen?'active':'';b.setAttribute('aria-checked',chosen?'true':'false');});
+text('pair-step-1',tr(happ?'Откройте Happ на телефоне':v2?'Откройте v2RayTun на телефоне':'Откройте Incy на телефоне'));text('pair-step-2',tr(happ?'Выберите «QR-код»':v2?'Выберите сервер или подписку':'Выберите «Отправить на ТВ»'));text('pair-step-4',tr(happ?'Выберите серверы и отправьте':v2?'В меню сервера нажмите на изображение QR-кода':'Сервер появится автоматически'));
+var qr=page==='add'&&p.phase==='waiting'&&p.qr&&seconds?p.qr:'';if(qr!==lastQR){lastQR=qr;el('pair-qr').textContent='';if(qr){var code=qrcode(0,'M');code.addData(qr);code.make();el('pair-qr').innerHTML=code.createSvgTag({cellSize:4,margin:4,scalable:true});}}el('pair-qr').classList.toggle('received',p.phase==='received');if(p.phase==='received')pairSuccess();else if(el('pair-qr').querySelector('.pair-success'))el('pair-qr').textContent='';}
+el('header-add').onclick=function(){if(page==='add')return;returnPage=page;showPage('add');startQR(pairProtocol);el('pair-start').focus();};el('pair-start').onclick=function(){startQR(pairProtocol);};Array.prototype.forEach.call(document.querySelectorAll('[data-pair]'),function(b){b.onclick=function(){startQR(b.getAttribute('data-pair'));};});
+Array.prototype.forEach.call(document.querySelectorAll('[data-tab]'),function(b){b.onclick=function(){showPage(b.getAttribute('data-tab'));};});
+window.addEventListener('pagehide',function(){if(page==='add')fetch('pair/cancel',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',keepalive:true}).catch(function(){});});
+el('language-choice').onchange=function(){var next=this.value,previous=state.settings.language||'auto';run('settings',{language:next}).then(function(result){if(!result)el('language-choice').value=previous;});};
+Array.prototype.forEach.call(document.querySelectorAll('[data-setting]'),function(b){b.onclick=function(){Array.prototype.forEach.call(document.querySelectorAll('[data-setting]'),function(n){n.className=n===b?'active':'';n.setAttribute('aria-selected',n===b?'true':'false');});Array.prototype.forEach.call(document.querySelectorAll('.settings-pane'),function(p){p.className='panel settings-pane'+(p.id===b.getAttribute('data-setting')?'':' hidden');});};});
+document.addEventListener('click',function(e){if(openServerId&&!e.target.closest('.server-actions'))closeServerMenu();});
+document.addEventListener('keydown',function(e){if(renameDialog){if(e.key==='Escape'||e.keyCode===10009){e.preventDefault();if(!working)closeRename();}if(e.key==='Tab'){var fields=Array.prototype.filter.call(renameDialog.querySelectorAll('input,button'),function(n){return !n.disabled;}),index=fields.indexOf(document.activeElement);e.preventDefault();fields[(index+(e.shiftKey?-1:1)+fields.length)%fields.length].focus();}return;}if((e.key==='Escape'||e.keyCode===10009)&&openServerId){e.preventDefault();closeServerMenu();return;}if((e.key==='Escape'||e.keyCode===10009)&&page==='add'){e.preventDefault();showPage(returnPage);el('header-add').focus();return;}if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].indexOf(e.key)<0||/TEXTAREA|SELECT|INPUT/.test(document.activeElement.tagName))return;var focus=Array.prototype.filter.call(document.querySelectorAll('button,select,textarea,input'),function(n){return !n.disabled&&n.offsetParent!==null;}),at=focus.indexOf(document.activeElement),step=e.key==='ArrowUp'||e.key==='ArrowLeft'?-1:1;var next=focus[Math.max(0,Math.min(focus.length-1,at+step))];if(next){e.preventDefault();next.focus();}});
+function poll(){var revision=stateRevision,serial=++pollSerial;request('state').then(function(s){if(revision===stateRevision&&serial===pollSerial)render(s);}).catch(function(e){if(revision===stateRevision&&serial===pollSerial)text('message',tr('Нет связи с плагином: ')+tr(e.message));});}poll();setInterval(poll,3000);setInterval(updateClock,1000);
+}());
+</script></body></html>

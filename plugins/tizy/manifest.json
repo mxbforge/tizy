@@ -1,0 +1,15 @@
+{
+  "id": "tizy",
+  "name": "TIZY",
+  "version": "0.4.2",
+  "apiVersion": 1,
+  "author": "mxbforge",
+  "description": "Standalone Xray VPN inside Vetro. VLESS Reality/XHTTP, VMess, Trojan, Shadowsocks and per-app routing. No TIZY TV app required.",
+  "permissions": [
+    "exec"
+  ],
+  "main": "index.js",
+  "ui": {
+    "label": "TIZY"
+  }
+}

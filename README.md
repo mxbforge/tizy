@@ -10,6 +10,7 @@
 
 | File | Purpose |
 |---|---|
+| [tizy-0.4.2.vplugin](https://github.com/mxbforge/tizy/releases/download/shard-v0.4.2/tizy-0.4.2.vplugin) | **Vetro Shard** — standalone plugin; the TIZY TV app is not required |
 | [TIZY-0.14.4-Universal-install.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-Universal-install.zip) | **TV installation** — WGT and license notices |
 | [TIZY-0.14.4-source.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-source.zip) | Source code for this release |
 | [TIZY-0.14.4-screenshots-en.zip](https://github.com/mxbforge/tizy/releases/download/v0.14.4/TIZY-0.14.4-screenshots-en.zip) | Interface screenshots — PNG, 1920×1080 |
@@ -52,3 +53,15 @@ In Servers, press **OK** to select a profile and open Home. Hold **OK** while th
 ## Development and licensing
 
 See [BUILD.md](docs/BUILD.md). Original client code is MIT licensed; Xray-core and other bundled components retain their own licenses. [Third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Standalone Vetro Shard
+
+TIZY is also available as an independent Shards API 1 plugin for Vetro 0.5.0.
+It runs inside Vetro without the TIZY WGT app or its service.
+See [plugin installation and limitations](plugins/tizy/README.md).
+Build: `npm run build:plugin`; test: `npm run test:plugin`.
+
+Download [tizy-0.4.2.vplugin](https://github.com/mxbforge/tizy/releases/download/shard-v0.4.2/tizy-0.4.2.vplugin), then open **Vetro → Shards → Install from a file**, enable Shards Developer mode and install and enable TIZY. [Release and checksums](https://github.com/mxbforge/tizy/releases/tag/shard-v0.4.2).
+
+The plugin supports link/subscription imports, existing-profile migration,
+Reality/XHTTP, per-app routing, traffic counters and optional exportable logs. QR transfer supports Incy, Happ and v2RayTun from the “+ Add” screen. Vetro and its root-agent must remain running. File installation is supported; the plugin is not in Vetro's official catalog.

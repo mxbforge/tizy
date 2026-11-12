@@ -14,7 +14,14 @@
     "test:ui": "node tests/ui.cjs",
     "test:package": "node tests/universal-package.cjs",
     "verify:public": "python3 tools/verify_public.py",
-    "test:layout": "node tests/server-layout.cjs"
+    "test:layout": "node tests/server-layout.cjs",
+    "build:plugin": "node scripts/build-plugin-pairing.cjs && node scripts/plugin-tools/scripts/vetro-plugin.cjs check plugins/tizy && node scripts/plugin-tools/scripts/vetro-plugin.cjs pack plugins/tizy dist",
+    "test:plugin": "node tests/plugin.cjs && node tests/plugin-ui.cjs && node tests/plugin-ping.cjs && node tests/plugin-compat.cjs && node tests/plugin-network-errors.cjs && node tests/plugin-settings-persistence.cjs",
+    "test:plugin:pairing": "node tests/plugin-pairing.cjs",
+    "test:plugin:pairing:live": "node tests/plugin-pairing.cjs --live",
+    "test:plugin:layout": "node tests/plugin-layout.cjs",
+    "test:plugin:compat": "node tests/plugin-compat-smoke.js",
+    "test:plugin:download": "node tests/plugin-download.cjs"
   },
   "devDependencies": {
     "jsdom": "26.1.0"

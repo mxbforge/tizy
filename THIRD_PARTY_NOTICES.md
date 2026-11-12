@@ -26,6 +26,12 @@ Pinned versions and integrity records are in `deps/package-lock.json`. Complete 
 | thunky | 1.1.0 | MIT |
 | ws | 8.22.1 | MIT |
 
+## Vetro Shard components
+
+The standalone plugin uses its own pinned runtime dependencies: ipaddr.js 1.9.1 (MIT), ws 5.2.4 (MIT), async-limiter 1.0.1 (MIT), libsodium-sumo and libsodium-wrappers-sumo 0.7.9 (ISC), and qrcode-generator 1.4.4 (MIT). Their notices, the TIZY MIT license and the Xray MPL-2.0 license are retained in [plugins/tizy/LICENSE-TIZY.txt](plugins/tizy/LICENSE-TIZY.txt). Build dependency integrity records are in [scripts/plugin-deps/package-lock.json](scripts/plugin-deps/package-lock.json).
+
+The packaging tool and validator under `scripts/plugin-tools/` come from [Vetro release-0.5.0](https://github.com/andrearicci93/vetro/tree/release-0.5.0/app) and retain [Vetro's MIT license](scripts/plugin-tools/LICENSE). These development tools are separate from the plugin runtime.
+
 ## Fonts
 
 - **Montserrat**, Copyright 2011 The Montserrat Project Authors. SIL OFL 1.1; [license](LICENSES/OFL.txt), [source](https://github.com/JulietaUla/Montserrat).
