@@ -43,5 +43,31 @@ await route(logged,'settings',{log:{...prefs,level:'error'}});assert.ok(!(await 
 await route(logged,'select',{id:'invalid'});assert.ok(logged.status().events.some(e=>e.level==='error'));assert.match(await exportText('filtered'),/Сервер не найден/);
 await route(logged,'logs/clear');assert.equal(logged.status().events.length,0);await route(logged,'settings',{log:{...prefs,enabled:false}});const frozen=logged.status().events.length;await route(logged,'rename',{id:logged.status().selected,name:'Changed'});assert.equal(logged.status().events.length,frozen);
 assert.equal(settings.state.settings.log.enabled,false);logged.stop();await drain();
+// Standby can remove the helper's mount while the plugin JS instance survives.
+settings={};let rootAvailable=true,mounted=false,prepares=0,coreStarts=0,now=Date.now();
+class WakeClock extends Date{static now(){return now;}}
+sandbox.Date=WakeClock;
+onExecute=async script=>{
+ if(!rootAvailable)throw Error('no root agent connected');
+ if(script.includes('mount --bind')){mounted=true;prepares++;}
+ if(script.includes('tizyp-runtime-uep/ro/xray')&&(/ version| run -test|api statsquery/.test(script))&&!mounted)return {exit_code:127,stderr:'/bin/sh: line 1: /opt/usr/home/owner/share/tizyp-runtime-uep/ro/xray: No such file or directory'};
+ if(script.includes('nohup sh -c'))coreStarts++;
+ let stdout=script.includes(' version')?'Xray 26.10.31\n':script.includes('generate_204')?'204':script.includes('SEVER_CONNECT:')?'SEVER_CONNECT:0.042':script.includes('api statsquery')?JSON.stringify({stat:[{name:'outbound>>>proxy>>>traffic>>>uplink',value:0},{name:'outbound>>>proxy>>>traffic>>>downlink',value:0}]}):'';
+ return {exit_code:0,stdout};
+};
+const wake=factory(ctx);wake.start();const wakeTick=timers[timers.length-1];await drain();
+await route(wake,'import',{text:'trojan://test@example.invalid:443#Wake'});
+assert.equal((await route(wake,'prepare')).status,200);assert.equal(wake.status().ready,true);
+const firstPreparation=prepares;mounted=false;
+r=await route(wake,'connect');assert.equal(r.status,200,'A lost read-only mount is restored before the next core execution');assert.equal(r.data.phase,'connected');assert.ok(mounted);assert.ok(prepares>firstPreparation);const wakeSelected=wake.status().selected;
+await route(wake,'disconnect');await route(wake,'settings',{autoConnect:true});
+const startsBeforeOutage=coreStarts,preparesBeforeOutage=prepares;rootAvailable=false;mounted=false;
+for(let i=0;i<7;i++){now+=35000;wakeTick();await drain();}
+assert.equal(coreStarts,startsBeforeOutage);assert.equal(prepares,preparesBeforeOutage);assert.equal(wake.status().ready,false,'Root loss invalidates the readiness indicator');assert.equal(wake.status().coreVersion,'');assert.equal(wake.status().error,'Ожидаем root-доступ');
+rootAvailable=true;now+=35000;wakeTick();await drain();
+assert.equal(wake.status().phase,'connected','Root returning after more than three checks must still reconnect');assert.equal(wake.status().ready,true);assert.ok(mounted);assert.ok(coreStarts>startsBeforeOutage);assert.equal(wake.status().selected,wakeSelected);assert.equal(wake.status().settings.autoConnect,true);
+wake.stop();await drain();onExecute=null;
+console.log('Standby: restores lost runtime mount; invalidates stale readiness; waits for root without exhausting retries; reconnects with preserved profile.');
+
 console.log('Plugin: bundle contract, imports, root errors, VPN lifecycle, isolated rules, settings, redaction, migration, restart and cancellation passed');
 })().catch(e=>{console.error(e);process.exitCode=1;});

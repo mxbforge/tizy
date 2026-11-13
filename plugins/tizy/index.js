@@ -10,7 +10,7 @@ var DATA='/opt/usr/home/owner/share/tizy-shard-data';
 var COMMIT='76d1b94b2495f5e475e20086102677e3e59ebdde';
 module.exports=function(ctx){
  var activeFile=path.join(ctx.dir,'active.json');
- var config=ctx.config.get()||{},state=config.state||{servers:[],selected:null,settings:{}},running=false,phase='disconnected',ready=false,error='',coreVersion='',timer=null,queue=Promise.resolve(),pending=0,connectedAt=0,stats={},logs=[],logSequence=0,generation=0,healthBusy=false,failures=0,nextRetry=0,retryCount=0,prepared=false,paused=false,wanted=false,lastHealth=0,qrInstances=null,qrLoading=null,qrLoadTask=null,qrActive=false,qrGeneration=0,qrProtocol='incy',qrView={phase:'idle'},routingInProgress=false,selectedPeer=null,peerSerial=0,serverPings={},pingSweep={running:false,total:0,completed:0},pingGeneration=0,pingCancels=[];
+ var config=ctx.config.get()||{},state=config.state||{servers:[],selected:null,settings:{}},running=false,phase='disconnected',ready=false,error='',coreVersion='',timer=null,queue=Promise.resolve(),pending=0,connectedAt=0,stats={},logs=[],logSequence=0,generation=0,healthBusy=false,failures=0,nextRetry=0,retryCount=0,paused=false,wanted=false,lastHealth=0,qrInstances=null,qrLoading=null,qrLoadTask=null,qrActive=false,qrGeneration=0,qrProtocol='incy',qrView={phase:'idle'},routingInProgress=false,selectedPeer=null,peerSerial=0,serverPings={},pingSweep={running:false,total:0,completed:0},pingGeneration=0,pingCancels=[];
  state.settings=state.settings||{};state.servers=state.servers||[];
  state.settings.ipFamily=['auto','ipv4','ipv6'].indexOf(state.settings.ipFamily)>=0?state.settings.ipFamily:'auto';
  state.settings.appProxy=apps.preferences(state.settings.appProxy);
@@ -19,15 +19,15 @@ module.exports=function(ctx){
  var monitor=new apps.Monitor({onError:function(e){error=e.message;if(routingInProgress)return;enqueue(disconnect).catch(function(){});}});
  function redact(text){text=String(text);state.servers.forEach(function(p){if(p.secret)text=text.split(p.secret).join('[secret]');});return text.replace(/(?:vless|vmess|trojan|ss):\/\/\S+/g,'[profile]').replace(/https:\/\/\S+/g,'[url]').slice(0,400);}
  function log(text,category,level,detail){if(!state.settings.log.enabled)return;category=category||(/серверов|перенесены|переименован|удалён/i.test(text)?'servers':/Xray|пинг|DNS|ядр/i.test(text)?'network':/VPN|подключени/i.test(text)?'connection':'system');var entry={id:++logSequence,time:Date.now(),text:Logging.scrub(redact(text)),category:category,level:level||'info'};if(detail)entry.detail=Logging.scrub(redact(detail));logs.push(entry);if(logs.length>300)logs.shift();}
- function exportLog(scope,language){var t=function(text){return i18n.t(text,language);},prefs=state.settings.log,list=logs.filter(function(event){return scope==='all'||Logging.visible(event,prefs);}),lines=['TIZY Shard — '+t('Журнал'),t('Версия: ')+'0.4.3',t('Создан (UTC): ')+new Date().toISOString(),t('Записей: ')+list.length,t('Режим экспорта: ')+t(scope==='all'?'Весь журнал':'По выбранным фильтрам'),''];list.slice().reverse().forEach(function(event){var level={info:'Информация',debug:'Подробно',warning:'Предупреждение',error:'Ошибка'}[event.level]||'Информация',category={connection:'Подключение',network:'Сеть',servers:'Серверы',system:'Система'}[event.category]||'Система';lines.push(new Date(event.time).toISOString()+' ['+t(level)+'] ['+t(category)+'] '+t(Logging.scrub(Logging.message(event.text))));if(event.detail&&(scope==='all'||prefs.details))lines.push('  '+t(Logging.scrub(event.detail)));});return '\ufeff'+lines.join('\r\n')+'\r\n';}
+ function exportLog(scope,language){var t=function(text){return i18n.t(text,language);},prefs=state.settings.log,list=logs.filter(function(event){return scope==='all'||Logging.visible(event,prefs);}),lines=['TIZY Shard — '+t('Журнал'),t('Версия: ')+'0.4.4',t('Создан (UTC): ')+new Date().toISOString(),t('Записей: ')+list.length,t('Режим экспорта: ')+t(scope==='all'?'Весь журнал':'По выбранным фильтрам'),''];list.slice().reverse().forEach(function(event){var level={info:'Информация',debug:'Подробно',warning:'Предупреждение',error:'Ошибка'}[event.level]||'Информация',category={connection:'Подключение',network:'Сеть',servers:'Серверы',system:'Система'}[event.category]||'Система';lines.push(new Date(event.time).toISOString()+' ['+t(level)+'] ['+t(category)+'] '+t(Logging.scrub(Logging.message(event.text))));if(event.detail&&(scope==='all'||prefs.details))lines.push('  '+t(Logging.scrub(event.detail)));});return '\ufeff'+lines.join('\r\n')+'\r\n';}
 
  function save(){config.state=state;ctx.config.set(config);}
- function root(command,timeout){return Promise.resolve().then(function(){return ctx.execute(wrap(command),timeout||45000);}).then(function(result){if(typeof result==='string')return result;if(!result||result.timed_out||result.exit_code!==0)throw new Error(result&&(result.stderr||result.error)||'Команда root завершилась с ошибкой');return result.stdout||'';});}
+ function root(command,timeout){return Promise.resolve().then(function(){return ctx.execute(wrap(command),timeout||45000);}).then(function(result){if(typeof result==='string')return result;if(!result||result.timed_out||result.exit_code!==0)throw new Error(result&&(result.stderr||result.error)||'Команда root завершилась с ошибкой');return result.stdout||'';}).catch(function(e){ready=false;coreVersion='';throw e;});}
  function enqueue(action){pending++;var result=queue.then(action);queue=result.then(function(){pending--;},function(e){pending--;error=redact(e.message);log(error,'system','error');});return result;}
  function write(name,text){fs.writeFileSync(path.join(DATA,name),text,{mode:384});}
  function clearActive(){[activeFile,path.join(DATA,'active.json')].forEach(function(file){try{fs.unlinkSync(file);}catch(e){if(e.code!=='ENOENT')log('Не удалось удалить рабочий конфиг: '+e.message);}});}
  function lease(){write('lease',String(Math.floor(Date.now()/1000)));}
- function snapshot(){return {name:'TIZY',version:'0.4.3',running:running,phase:phase,ready:ready,busy:pending>0,coreVersion:coreVersion,error:error,connectedAt:connectedAt,traffic:stats,serverPings:serverPings,selectedPeer:selectedPeer,pingSweep:pingSweep,settings:state.settings,selected:state.selected,migrated:!!config.migrated,pairing:qrActive?(qrInstances?qrInstances[qrProtocol].view:qrView):{phase:'idle'},pairProtocol:qrProtocol,servers:state.servers.map(function(p){return {id:p.id,name:p.name,protocol:p.protocol,network:p.network,security:p.security,serverIP:net.isIP(ipFamily.host(p.host))?ipFamily.host(p.host):null,family:net.isIP(ipFamily.host(p.host))||null};}),events:logs};}
+ function snapshot(){return {name:'TIZY',version:'0.4.4',running:running,phase:phase,ready:ready,busy:pending>0,coreVersion:coreVersion,error:error,connectedAt:connectedAt,traffic:stats,serverPings:serverPings,selectedPeer:selectedPeer,pingSweep:pingSweep,settings:state.settings,selected:state.selected,migrated:!!config.migrated,pairing:qrActive?(qrInstances?qrInstances[qrProtocol].view:qrView):{phase:'idle'},pairProtocol:qrProtocol,servers:state.servers.map(function(p){return {id:p.id,name:p.name,protocol:p.protocol,network:p.network,security:p.security,serverIP:net.isIP(ipFamily.host(p.host))?ipFamily.host(p.host):null,family:net.isIP(ipFamily.host(p.host))||null};}),events:logs};}
  function prepare(){
   var core=DATA+'/xray';
   // Only immutable, published TIZY binaries, verified before executable permissions.
@@ -37,7 +37,7 @@ module.exports=function(ctx){
    'if ! printf "%s  %s\\n" "$tizy_hash" "$tizy_dst" | sha256sum -c - >/dev/null 2>&1; then',
    'curl --proto =https --proto-redir =https --tlsv1.2 -fL --connect-timeout 10 --max-time 35 '+q('https://raw.githubusercontent.com/mxbforge/tizy/'+COMMIT+'/app/core/')+'"$tizy_name" -o "$tizy_dst.next"',
    'printf "%s  %s\\n" "$tizy_hash" "$tizy_dst.next" | sha256sum -c - >/dev/null','chmod 700 "$tizy_dst.next"','mv -f "$tizy_dst.next" "$tizy_dst"','fi',runtime.prepare(core),q(runtime.core)+' version'].join('\n');
-  ready=false;prepared=false;return root(install,45000).then(function(text){coreVersion=text.trim().split('\n')[0];ready=true;prepared=true;error='';log('Ядро Xray готово','network','debug',coreVersion);});
+  ready=false;return root(install,45000).then(function(text){coreVersion=text.trim().split('\n')[0];ready=true;error='';log('Ядро Xray готово','network','debug',coreVersion);});
  }
  function conflict(){
   // Refuse to take over another VPN's rules, including the old TIZY app.
@@ -52,7 +52,10 @@ module.exports=function(ctx){
   var p=state.servers.filter(function(s){return s.id===state.selected;})[0];if(!p)throw new Error('Выберите сервер');
   cancelPings();var gen=generation;phase='connecting';error='';log('Подключаемся к серверу: '+p.name,'connection');
   function alive(){if(!running||gen!==generation)throw new Error('Подключение отменено');lease();}
-  return conflict().then(function(){return prepared?null:prepare();}).then(function(){alive();return root(tv.preflight());}).then(function(){
+  // The root helper can return in a new mount namespace after standby while
+  // this JS instance survives. Never trust its cached readiness across a connect.
+  // prepare() reuses the verified download and a valid mount without replacing it.
+  return conflict().then(prepare).then(function(){alive();return root(tv.preflight());}).then(function(){
    fs.writeFileSync(activeFile,JSON.stringify(profiles.config(p,'tv',state.settings.ipFamily)),{mode:384});write('core.log','');alive();return root(q(runtime.core)+' run -test -c '+q(activeFile));
   }).then(function(){alive();return root(network.start(DATA,runtime.core,'tv',state.settings.appProxy,activeFile));}).then(function(){return new Promise(function(resolve){setTimeout(resolve,1000);});})
   .then(function(){alive();return checkTunnel(function(){return root(tv.enter('curl --connect-timeout 5 --max-time 12 --socks5-hostname 127.0.0.1:'+ports.socks+' -fsS -o /dev/null -w "%{http_code}" https://www.gstatic.com/generate_204'));});})
@@ -87,7 +90,7 @@ module.exports=function(ctx){
   var u=url.parse(address);if(u.protocol!=='https:'||u.auth||!u.hostname||(u.port&&u.port!=='443')||depth>3)return reject(new Error('Нужна публичная HTTPS-подписка на порту 443'));
   // Pin a validated address to prevent DNS rebinding and LAN subscription requests.
   dns.lookup(u.hostname,{family:4},function(e,ip){if(e||!public4(ip))return reject(new Error('Адрес подписки недоступен или относится к локальной сети'));
-   var request=https.get({hostname:ip,servername:u.hostname,path:u.path,headers:{Host:u.hostname,'User-Agent':'TIZY-Shard/0.4.3'}},function(res){
+   var request=https.get({hostname:ip,servername:u.hostname,path:u.path,headers:{Host:u.hostname,'User-Agent':'TIZY-Shard/0.4.4'}},function(res){
     if([301,302,303,307,308].indexOf(res.statusCode)>=0){res.resume();return subscription(url.resolve(address,res.headers.location||''),depth+1).then(resolve,reject);}
     if(res.statusCode!==200){res.resume();return reject(new Error('Подписка: HTTP '+res.statusCode));}
     var parts=[],size=0;res.on('data',function(chunk){size+=chunk.length;if(size>524288){request.abort();reject(new Error('Подписка превышает 512 КБ'));}else parts.push(chunk);});res.on('error',reject);res.on('aborted',function(){reject(new Error('Загрузка подписки прервана'));});res.on('end',function(){resolve(Buffer.concat(parts).toString('utf8'));});
@@ -106,7 +109,16 @@ module.exports=function(ctx){
   if(!running)return;
   if(phase==='connecting'||phase==='connected')try{lease();}catch(e){error=redact(e.message);}
   if(pending||healthBusy)return;
-  if(!paused&&(wanted||state.settings.autoConnect)&&state.selected&&phase!=='connected'&&Date.now()>=nextRetry&&retryCount<3){retryCount++;nextRetry=Date.now()+30000;enqueue(connect).catch(function(){});return;}
+  if(!paused&&(wanted||state.settings.autoConnect)&&state.selected&&phase!=='connected'&&Date.now()>=nextRetry&&retryCount<3){
+   // A missing helper is not a failed VPN attempt. Wait for root before spending
+   // the three attempts, then validate the executable in that helper's namespace.
+   healthBusy=true;var retryGeneration=generation;
+   root('true',5000).then(function(){
+    if(!running||retryGeneration!==generation||paused||pending||(!wanted&&!state.settings.autoConnect)||!state.selected||phase==='connected')return;
+    retryCount++;nextRetry=Date.now()+30000;return enqueue(connect).catch(function(){});
+   },function(){if(running&&retryGeneration===generation&&!paused&&(wanted||state.settings.autoConnect)){error='Ожидаем root-доступ';nextRetry=Date.now()+5000;}}).then(function(){healthBusy=false;},function(){healthBusy=false;});
+   return;
+  }
   if(phase!=='connected')return;
   healthBusy=true;var gen=generation;
   root('( '+network.verifyPid(DATA,runtime.core)+' ) && '+tv.verify()+' && '+traffic.command(runtime.core),10000).then(function(text){

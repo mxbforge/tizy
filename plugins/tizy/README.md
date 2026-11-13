@@ -1,13 +1,13 @@
-# TIZY Shard 0.4.3
+# TIZY Shard 0.4.4
 
 A standalone Xray VPN plugin for [Vetro](https://github.com/andrearicci93/vetro) 0.5.0, using the experimental Shards API 1. Manage it in **Vetro → Shards → TIZY** from your browser. The TIZY TV app, its background service and a continuously running computer are not required. Vetro and its root-agent must remain running on the TV.
 
-[Download tizy-0.4.3.vplugin](https://github.com/mxbforge/tizy/releases/download/shard-v0.4.3/tizy-0.4.3.vplugin) · [Release and checksums](https://github.com/mxbforge/tizy/releases/tag/shard-v0.4.3) · [Русский](../../docs/SHARD.ru.md)
+[Download tizy-0.4.4.vplugin](https://github.com/mxbforge/tizy/releases/download/shard-v0.4.4/tizy-0.4.4.vplugin) · [Release and checksums](https://github.com/mxbforge/tizy/releases/tag/shard-v0.4.4) · [Русский](../../docs/SHARD.ru.md)
 
 ## Installation
 
 1. Set up a compatible [Vetro](https://github.com/andrearicci93/vetro) 0.5.0 installation with a working UID-0 root-agent.
-2. Download `tizy-0.4.3.vplugin` from the release above.
+2. Download `tizy-0.4.4.vplugin` from the release above.
 3. Open **Vetro → Shards → Install from a file**, enable the Shards Developer mode when prompted, and select the file. This is the plugin setting inside Vetro.
 4. Enable TIZY, open its tab, and add a server through **+ Add** using a link, an HTTPS subscription or a supported QR transfer.
 5. Disconnect any other VPN on the TV, select your server, and press the power button on Home. Xray is downloaded and verified on the first connection.
@@ -15,6 +15,10 @@ A standalone Xray VPN plugin for [Vetro](https://github.com/andrearicci93/vetro)
 You can close the browser after connecting. Autoconnect runs when Vetro starts the enabled plugin and its root-agent becomes available. This plugin does not provide persistent root or change TV firmware or the bootloader. It is a file-installed plugin; it is not listed in Vetro's official catalog.
 
 The project GitHub link is in **Settings → About**. Vetro restricts external navigation inside plugin tabs, so selecting it opens a copyable address for your browser.
+
+## Standby recovery in 0.4.4
+
+Every connection revalidates the cached Xray binary and its read-only runtime mount in the current root helper context. A mount lost after standby is recreated automatically, without redownloading a valid cached binary. Root-command failures invalidate cached readiness; automatic retries wait for the helper instead of exhausting VPN attempts while root is unavailable.
 
 ## Features
 
@@ -64,7 +68,7 @@ npm run build:plugin
 npm run test:plugin
 ```
 
-The output is `dist/tizy-0.4.3.vplugin`. Packaging and validation tools are copied from [Vetro release-0.5.0](https://github.com/andrearicci93/vetro/tree/release-0.5.0/app) and retain their MIT license. The manifest, source and lockfiles are included in this repository.
+The output is `dist/tizy-0.4.4.vplugin`. Packaging and validation tools are copied from [Vetro release-0.5.0](https://github.com/andrearicci93/vetro/tree/release-0.5.0/app) and retain their MIT license. The manifest, source and lockfiles are included in this repository.
 
 ## Licenses
 
